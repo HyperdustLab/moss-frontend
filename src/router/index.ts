@@ -186,7 +186,7 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         path: '/faucet/index',
         component: () => import('@/views/faucet/index.vue'),
-        name: 'faucet',
+        name: 'faucetIndex',
         meta: {
           title: t('menu.faucet'),
           svgIcon: 'FAUCET',
@@ -246,7 +246,6 @@ export const constantRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-
 ]
 
 /**
@@ -274,7 +273,7 @@ const router = createRouter({
 export function resetRouter() {
   // 注意：所有动态路由路由必须带有 Name 属性，否则可能会不能完全重置干净
   try {
-    router.getRoutes().forEach(route => {
+    router.getRoutes().forEach((route) => {
       const { name, meta } = route
       if (name && meta.roles?.length) {
         router.hasRoute(name) && router.removeRoute(name)

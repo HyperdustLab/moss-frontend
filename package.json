@@ -51,6 +51,7 @@
     "share-button-links": "^2.3.7",
     "sharer.js": "^0.5.1",
     "tailwindcss": "^3.4.3",
+    "v3-admin-vite": "file:",
     "vue": "3.3.4",
     "vue-clipboard3": "^2.0.0",
     "vue-echarts": "^6.6.1",
