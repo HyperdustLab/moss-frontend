@@ -2,22 +2,22 @@
   <div>
     <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: #141414">
       <div style="display: flex; justify-content: space-between">
-        <img @click="href('https://www.hyperagi.network/')" style="width: 200px; height: 60px" :src="logo"/>
+        <img @click="href('https://www.hyperagi.network/')" style="width: 240px; height: 60px" :src="logo" />
 
         <el-dropdown @command="handleCommand" class="custom-dropdown w-50 ml-330">
           <span class="el-dropdown-link" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
-            <el-avatar :size="13" :src="currBlockchain.icon"/>
+            <el-avatar :size="13" :src="currBlockchain.icon" />
 
             <span style="margin-left: 10px">{{ currBlockchain.name }}</span>
 
             <el-icon size="13" class="el-icon--right">
-              <arrow-down/>
+              <arrow-down />
             </el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item v-for="(item, index) in blockchainList" :command="item.id" :style="{ 'margin-top': index === 0 ? '5px' : '10px' }" :key="index">
-                <el-avatar :size="25" :src="item.icon"/>
+                <el-avatar :size="25" :src="item.icon" />
 
                 <span style="font-size: 13px; margin-left: 10px"> {{ item.name }}</span>
               </el-dropdown-item>
@@ -27,21 +27,21 @@
 
         <el-dropdown v-if="user.token" style="margin-left: 10px; width: 200px" class="custom-dropdown">
           <span class="el-dropdown-link" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
-            <el-avatar :size="16" :src="user.avatar"/>
+            <el-avatar :size="16" :src="user.avatar" />
 
             <span style="margin-left: 5px">
               <Substring :copys="false" color="#ffffff" fontSize="13px" :value="user.username"></Substring>
             </span>
 
             <el-icon size="13" class="el-icon--right">
-              <arrow-down/>
+              <arrow-down />
             </el-icon>
           </span>
           <template #dropdown>
             <el-card style="width: 200px">
               <template #header>
                 <div class="card-header" style="display: flex; align-items: center">
-                  <el-avatar :size="25" :src="user.avatar"/>
+                  <el-avatar :size="25" :src="user.avatar" />
 
                   <span style="margin-left: 15px">
                     <Substring color="#ffffff" fontSize="12px" :value="user.username"></Substring>
@@ -51,21 +51,19 @@
 
               <p style="margin-left: 5px; display: flex; align-items: center">
                 <el-icon size="20">
-                  <User/>
+                  <User />
                 </el-icon>
 
                 <el-button type="plain" @click="goHome" style="font-size: 12px" link>{{ $t('index.dashboard') }}</el-button>
               </p>
 
-
               <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
-                <SvgIcon width="1.5em" height="1.5em" name="email"/>
+                <SvgIcon width="1.5em" height="1.5em" name="email" />
 
                 <el-button type="plain" @click="showBindEmail" style="font-size: 12px" link>
                   {{ user.email || 'Bind Email' }}
                 </el-button>
               </p>
-
 
               <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
                 <el-image :src="logoutPng" style="width: 20px; height: 20px"></el-image>
@@ -78,7 +76,7 @@
 
         <el-dropdown v-else style="margin-left: 10px; width: 160px; float: right" trigger="contextmenu" class="custom-dropdown">
           <span class="el-dropdown-link" @click="metamaskLogin" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
-            <el-avatar :size="16" :src="metamask"/>
+            <el-avatar :size="16" :src="metamask" />
 
             <span style="margin-left: 6px">{{ $t('index.connectWallet') }}</span>
           </span>
@@ -90,7 +88,7 @@
       <el-carousel indicator-position="none" height="600px" :interval="5000">
         <el-carousel-item v-for="(item, index) in bannerList" :key="index">
           <div style="width: 100%">
-            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted style="width: 100%" autoplay/>
+            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted style="width: 100%" autoplay />
           </div>
         </el-carousel-item>
       </el-carousel>
@@ -102,10 +100,10 @@
               <el-col :span="24">
                 <div style="margin-left: 13%">
                   <span style="font-size: 20px; font-weight: 100; margin-left: 30%">Hyperspce Scan</span>
-                  <br/>
+                  <br />
                   <el-input v-model="searchData.searchTxt" :placeholder="$t('index.searchSpaceTxt')" clearable style="width: 1300px; height: 50px; margin-left: 10px; margin-top: 20px; background-color: #1d1e1f" size="large" class="rounded-search" @clear="handleSearch" @keyup.enter="handleSearch">
                     <template #append>
-                      <el-button :icon="Search" @click="handleSearch"/>
+                      <el-button :icon="Search" @click="handleSearch" />
                     </template>
                   </el-input>
                 </div>
@@ -124,11 +122,11 @@
                   <GlobeAppImage :value="item.coverImage" :image="item.image" :key="index"></GlobeAppImage>
                   <div style="padding: 14px">
                     <span style="font-size: 20px; font-weight: 1000"
-                    >{{ item.name }}
+                      >{{ item.name }}
 
                       <el-popover placement="right" :width="400" trigger="hover">
                         <template #reference>
-                          <el-icon style="cursor: pointer; float: right"><Share/></el-icon>
+                          <el-icon style="cursor: pointer; float: right"><Share /></el-icon>
                         </template>
 
                         <HShare :url="getHyperdustEpoch(item)" :title="item.name" :image="item.coverImage.split(',')[0]"></HShare>
@@ -137,7 +135,7 @@
 
                     <div class="bottom">
                       <time class="time"
-                      >SID：
+                        >SID：
                         <Substring :value="item.sid"></Substring>
                       </time>
                     </div>
@@ -171,24 +169,24 @@
 
     <BindEmail ref="bindEmail"></BindEmail>
 
-    <el-backtop :right="100" :bottom="100"/>
+    <el-backtop :right="100" :bottom="100" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import {onBeforeMount, reactive, ref, watch, onMounted} from 'vue'
+import { onBeforeMount, reactive, ref, watch, onMounted } from 'vue'
 
-import {type GetTableData} from '@/api/table/types/table'
-import {type FormInstance} from 'element-plus'
-import {usePagination} from '@/hooks/usePagination'
+import { type GetTableData } from '@/api/table/types/table'
+import { type FormInstance } from 'element-plus'
+import { usePagination } from '@/hooks/usePagination'
 
-import {useUserStore} from '@/store/modules/user'
+import { useUserStore } from '@/store/modules/user'
 
 import api from '@/utils/api'
 
 import logo from '@/assets/layouts/logo-text-1.png?url'
 
-import {Search} from '@element-plus/icons-vue'
+import { Search } from '@element-plus/icons-vue'
 
 import AppTypeList from './appTypeList.vue'
 
@@ -196,9 +194,7 @@ import Substring from '@/components/substring.vue'
 
 import GlobeAppImage from '../../../globeAppImage.vue'
 
-
 import BindEmail from '@/layouts/components/NavigationBar/BindEmail.vue'
-
 
 import logoutPng from '@/assets/image/logout.png?url'
 
@@ -213,7 +209,7 @@ const observerElement = ref(null)
 
 const bannerList = ref([])
 
-import {metamaskLogin} from '@/api/login'
+import { metamaskLogin } from '@/api/login'
 
 const searchData = reactive({
   status: 'Y',
@@ -224,22 +220,21 @@ const searchData = reactive({
   searchTxt: '',
 })
 
-
 const bindEmail = ref(null)
 
 onMounted(() => {
   observer = new IntersectionObserver(
-      entries => {
-        const [entry] = entries
-        if (entry.isIntersecting) {
-          loadMoreItems()
-        }
-      },
-      {
-        root: null, // 视口作为滚动容器
-        rootMargin: '0px',
-        threshold: 0.1, // 当底部元素露出10%时触发
+    (entries) => {
+      const [entry] = entries
+      if (entry.isIntersecting) {
+        loadMoreItems()
       }
+    },
+    {
+      root: null, // 视口作为滚动容器
+      rootMargin: '0px',
+      threshold: 0.1, // 当底部元素露出10%时触发
+    }
   )
 
   if (observerElement.value) {
@@ -260,7 +255,7 @@ const currBlockchain = ref({})
 const globeApp = ref(null)
 
 const loading = ref<boolean>(false)
-const {paginationData, handleCurrentChange, handleSizeChange} = usePagination()
+const { paginationData, handleCurrentChange, handleSizeChange } = usePagination()
 
 paginationData.pageSize = 6
 
@@ -295,7 +290,7 @@ function handleCommand(command) {
   localStorage.setItem('currBlockchainId', command)
   currBlockchainId.value = command
 
-  currBlockchain.value = blockchainList.value.filter(item => item.id === currBlockchainId.value)[0]
+  currBlockchain.value = blockchainList.value.filter((item) => item.id === currBlockchainId.value)[0]
 }
 
 async function loadMoreItems() {
@@ -317,7 +312,7 @@ const getTableData = async () => {
   searchData.pageNo = paginationData.currentPage
   searchData.pageSize = paginationData.pageSize
 
-  const {result} = await api.get('/mgn/globeApp/list', searchData)
+  const { result } = await api.get('/mgn/globeApp/list', searchData)
   tableData.value.push(...result.records)
   paginationData.total = result.total
   paginationData.pageCount = result.pages
@@ -356,7 +351,7 @@ function openApp(sid) {
 }
 
 async function getBlockchainList() {
-  const {result} = await api.get('/mgn/blockchain/list', {pageSize: -1, status: 'Y'})
+  const { result } = await api.get('/mgn/blockchain/list', { pageSize: -1, status: 'Y' })
   blockchainList.value = result.records
 }
 
@@ -367,7 +362,6 @@ function disconnect() {
 function href(url) {
   location.href = url
 }
-
 
 function showBindEmail() {
   bindEmail.value.show()
@@ -383,9 +377,10 @@ function showBindEmail() {
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  box-shadow: 0 0 0 0 var(--el-input-border-color) inset,
-  0 0 0 0 var(--el-input-border-color) inset,
-  0 0 0 0 var(--el-input-border-color) inset;
+  box-shadow:
+    0 0 0 0 var(--el-input-border-color) inset,
+    0 0 0 0 var(--el-input-border-color) inset,
+    0 0 0 0 var(--el-input-border-color) inset;
 }
 
 :deep .el-input__wrapper {
@@ -400,7 +395,7 @@ function showBindEmail() {
   cursor: text;
   transition: var(--el-transition-box-shadow);
   transform: translate3d(0, 0, 0);
-//  box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
+  //  box-shadow: 0 0 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
 }
 
 :deep .el-card {
