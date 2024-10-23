@@ -30,7 +30,7 @@
             <el-avatar :size="16" :src="user.avatar" />
 
             <span style="margin-left: 5px">
-              <Substring :copys="false" color="#ffffff" fontSize="13px" :value="user.username"></Substring>
+              <Substring :copys="false" color="#ffffff" fontSize="13px" :value="user.walletAddress || user.username"></Substring>
             </span>
 
             <el-icon size="13" class="el-icon--right">
@@ -44,7 +44,7 @@
                   <el-avatar :size="25" :src="user.avatar" />
 
                   <span style="margin-left: 15px">
-                    <Substring color="#ffffff" fontSize="12px" :value="user.username"></Substring>
+                    <Substring color="#ffffff" fontSize="12px" :value="user.walletAddress || user.username"></Substring>
                   </span>
                 </div>
               </template>
@@ -99,7 +99,7 @@
             <el-row style="margin-top: 40px">
               <el-col :span="24">
                 <div style="margin-left: 13%">
-                  <span style="font-size: 20px; font-weight: 100; margin-left: 30%">Hyperspce Scan</span>
+                  <span style="font-size: 20px; font-weight: 100; margin-left: 30%">Hyperspace Scan</span>
                   <br />
                   <el-input v-model="searchData.searchTxt" :placeholder="$t('index.searchSpaceTxt')" clearable style="width: 1300px; height: 50px; margin-left: 10px; margin-top: 20px; background-color: #1d1e1f" size="large" class="rounded-search" @clear="handleSearch" @keyup.enter="handleSearch">
                     <template #append>

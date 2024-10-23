@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {computed, ref, onMounted} from 'vue'
-import {useRouter} from 'vue-router'
-import {storeToRefs} from 'pinia'
-import {useAppStore} from '@/store/modules/app'
-import {useSettingsStore} from '@/store/modules/settings'
-import {useUserStore} from '@/store/modules/user'
+import { computed, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useAppStore } from '@/store/modules/app'
+import { useSettingsStore } from '@/store/modules/settings'
+import { useUserStore } from '@/store/modules/user'
 import Hamburger from '../Hamburger/index.vue'
 import Share from '../Share/index.vue'
 import Breadcrumb from '../Breadcrumb/index.vue'
@@ -12,15 +12,17 @@ import Sidebar from '../Sidebar/index.vue'
 import ThemeSwitch from '@/components/ThemeSwitch/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import Notify from '@/components/Notify/index.vue'
-import {DeviceEnum} from '@/constants/app-key'
+import { DeviceEnum } from '@/constants/app-key'
 import UploadAvatar from './uploadAvatar.vue'
 import BindEmail from './BindEmail.vue'
+
+import Login from '@/components/login/index.vue'
 
 import api from '@/utils/api'
 
 import Substring from '@/components/substring.vue'
 
-import {metamaskLogin} from '@/api/login'
+import { metamaskLogin } from '@/api/login'
 
 import logoutPng from '@/assets/image/logout.png?url'
 
@@ -32,13 +34,14 @@ const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()
 
+const loginRef = ref(null)
 
 const bindEmail = ref(null)
 
 const uploadAvatar = ref(null)
 
-const {sidebar, device} = storeToRefs(appStore)
-const {layoutMode, showNotify, showThemeSwitch, showScreenfull} = storeToRefs(settingsStore)
+const { sidebar, device } = storeToRefs(appStore)
+const { layoutMode, showNotify, showThemeSwitch, showScreenfull } = storeToRefs(settingsStore)
 
 const isTop = computed(() => layoutMode.value === 'top')
 const isMobile = computed(() => device.value === DeviceEnum.Mobile)
@@ -63,21 +66,21 @@ function goHome() {
 }
 
 async function getBlockchainList() {
-  const {result} = await api.get('/mgn/blockchain/list', {pageSize: -1, status: 'Y'})
+  const { result } = await api.get('/mgn/blockchain/list', { pageSize: -1, status: 'Y' })
   blockchainList.value = result.records
 }
 
 onMounted(async () => {
   await getBlockchainList()
 
-  currBlockchain.value = blockchainList.value.filter(item => item.id === currBlockchainId.value)[0]
+  currBlockchain.value = blockchainList.value.filter((item) => item.id === currBlockchainId.value)[0]
 })
 
 function handleCommand(command) {
   localStorage.setItem('currBlockchainId', command)
   currBlockchainId.value = command
 
-  currBlockchain.value = blockchainList.value.filter(item => item.id === currBlockchainId.value)[0]
+  currBlockchain.value = blockchainList.value.filter((item) => item.id === currBlockchainId.value)[0]
 }
 
 function showUploadAvatar() {
@@ -88,37 +91,36 @@ function showBindEmail() {
   bindEmail.value.show()
 }
 
-
+function showLogin() {
+  loginRef.value.show()
+}
 </script>
 
 <template>
   <div class="navigation-bar">
-    <Hamburger v-if="!isTop || isMobile" :is-active="sidebar.opened" class="hamburger"
-               @toggle-click="toggleSidebar"/>
-    <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb"/>
-    <Sidebar v-if="isTop && !isMobile" class="sidebar"/>
+    <Hamburger v-if="!isTop || isMobile" :is-active="sidebar.opened" class="hamburger" @toggle-click="toggleSidebar" />
+    <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb" />
+    <Sidebar v-if="isTop && !isMobile" class="sidebar" />
     <div class="right-menu">
-      <Screenfull v-if="showScreenfull" class="right-menu-item"/>
-      <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item"/>
-      <Notify v-if="showNotify" class="right-menu-item"/>
+      <Screenfull v-if="showScreenfull" class="right-menu-item" />
+      <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
+      <Notify v-if="showNotify" class="right-menu-item" />
 
       <div style="width: 200px">
         <el-dropdown @command="handleCommand" class="custom-dropdown" style="width: 180px">
           <span class="el-dropdown-link" style="margin-top: 2px">
-            <el-avatar :size="13" :src="currBlockchain.icon"/>
+            <el-avatar :size="13" :src="currBlockchain.icon" />
 
             <span style="margin-left: 10px">{{ currBlockchain.name }}</span>
 
             <el-icon size="13" class="el-icon--right">
-              <arrow-down/>
+              <arrow-down />
             </el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item v-for="(item, index) in blockchainList" :command="item.id"
-                                :style="{ 'margin-top': index === 0 ? '5px' : '10px' }"
-                                :key="index">
-                <el-avatar :size="25" :src="item.icon"/>
+              <el-dropdown-item v-for="(item, index) in blockchainList" :command="item.id" :style="{ 'margin-top': index === 0 ? '5px' : '10px' }" :key="index">
+                <el-avatar :size="25" :src="item.icon" />
 
                 <span style="font-size: 13px; margin-left: 10px"> {{ item.name }}</span>
               </el-dropdown-item>
@@ -128,33 +130,32 @@ function showBindEmail() {
       </div>
 
       <el-dropdown v-if="userStore.token" style="width: 200px" class="custom-dropdown">
-        <span class="el-dropdown-link"
-              style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
-          <el-avatar :size="16" :src="userStore.avatar"/>
+        <span class="el-dropdown-link" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
+          <el-avatar :size="16" :src="userStore.avatar" />
 
           <span style="margin-left: 5px">
-            <Substring :copys="false" color="#ffffff" fontSize="13px" :value="userStore.username"></Substring>
+            <Substring :copys="false" color="#ffffff" fontSize="13px" :value="userStore.walletAddress || userStore.username"></Substring>
           </span>
 
           <el-icon size="13" class="el-icon--right">
-            <arrow-down/>
+            <arrow-down />
           </el-icon>
         </span>
         <template #dropdown>
           <el-card style="width: 300px">
             <template #header>
               <div class="card-header" style="display: flex; align-items: center">
-                <el-avatar :size="25" :src="userStore.avatar"/>
+                <el-avatar :size="25" :src="userStore.avatar" />
 
                 <span style="margin-left: 15px">
-                  <Substring color="#ffffff" fontSize="12px" :value="userStore.username"></Substring>
+                  <Substring color="#ffffff" fontSize="12px" :value="userStore.walletAddress || userStore.username"></Substring>
                 </span>
               </div>
             </template>
 
             <p style="margin-left: 5px; display: flex; align-items: center">
               <el-icon size="20">
-                <User/>
+                <User />
               </el-icon>
 
               <el-button type="plain" @click="goHome" style="font-size: 12px" link>
@@ -163,7 +164,7 @@ function showBindEmail() {
             </p>
 
             <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
-              <SvgIcon width="1.5em" height="1.5em" name="email"/>
+              <SvgIcon width="1.5em" height="1.5em" name="email" />
 
               <el-button type="plain" @click="showBindEmail" style="font-size: 12px" link>
                 {{ userStore.email || 'Bind Email' }}
@@ -172,7 +173,7 @@ function showBindEmail() {
 
             <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
               <el-icon size="20">
-                <Edit/>
+                <Edit />
               </el-icon>
 
               <el-button type="plain" @click="showUploadAvatar" style="font-size: 12px" link>
@@ -180,10 +181,9 @@ function showBindEmail() {
               </el-button>
             </p>
 
-            <p v-if="userStore.invitationCode"
-               style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
+            <p v-if="userStore.invitationCode" style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
               <el-icon :size="20">
-                <Share/>
+                <Share />
               </el-icon>
 
               <text style="margin-left: 2px">Invitation Code：</text>
@@ -202,13 +202,9 @@ function showBindEmail() {
         </template>
       </el-dropdown>
 
-      <el-dropdown v-else style="margin-left: 30px; width: 160px" trigger="contextmenu"
-                   class="custom-dropdown">
-        <span class="el-dropdown-link" @click="metamaskLogin"
-              style="margin-top: 3px; margin-left: 10px">
-          <el-avatar :size="16" :src="metamask"/>
-
-          <span style="margin-left: 6px">{{ $t('index.connectWallet') }}</span>
+      <el-dropdown v-else style="width: 120px" trigger="contextmenu" class="custom-dropdown">
+        <span class="el-dropdown-link" @click="showLogin" style="margin-top: 3px; margin-left: 25%">
+          <span style="margin-left: 6px">Login</span>
         </span>
       </el-dropdown>
     </div>
@@ -216,6 +212,8 @@ function showBindEmail() {
     <UploadAvatar ref="uploadAvatar"></UploadAvatar>
 
     <BindEmail ref="bindEmail"></BindEmail>
+
+    <Login ref="loginRef"></Login>
   </div>
 </template>
 
