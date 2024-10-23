@@ -58,7 +58,7 @@ async function show(item, _parameter) {
 
     const Hyperdust_Token = await buildContract(currBlockchainId, 'Hyperdust_Token')
 
-    const b = await Hyperdust_Token.balanceOf(user.username)
+    const b = await Hyperdust_Token.balanceOf(user.walletAddress)
 
     balance.value = parseInt(b)
 

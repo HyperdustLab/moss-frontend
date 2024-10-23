@@ -60,7 +60,7 @@ onBeforeMount(async () => {
 
 onMounted(() => {
   observer = new IntersectionObserver(
-    entries => {
+    (entries) => {
       const [entry] = entries
       if (entry.isIntersecting) {
         loadMoreItems()
@@ -161,7 +161,7 @@ async function handleSpaceType(index) {
       await metamaskLogin()
     }
 
-    searchData.account = user.username
+    searchData.account = user.walletAddress
     searchData.active = false
     searchData.status = ''
   } else {
@@ -252,7 +252,7 @@ async function handleSpaceType(index) {
           </el-table-column>
           <el-table-column v-if="typeIndex === '1'" fixed="right" :label="t('actionBtnTxt')" width="150" align="center">
             <template #default="{ row }">
-              <el-dropdown v-if="row.account === user.username">
+              <el-dropdown v-if="row.account === user.walletAddress">
                 <span class="el-dropdown-link">
                   {{ t('actionBtnTxt') }}
                   <el-icon class="el-icon--right">

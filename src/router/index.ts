@@ -63,6 +63,16 @@ export const constantRoutes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
+
+  {
+    path: '/privacyPolicy',
+    component: () => import('@/views/privacyPolicy/index.vue'),
+    name: 'privacyPolicy',
+    meta: {
+      hidden: true,
+    },
+  },
+
   {
     path: '/SelfEvolvableAgent',
     component: () => import('@/views/agent/index.vue'),

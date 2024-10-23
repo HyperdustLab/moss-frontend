@@ -29,7 +29,7 @@ async function initBlockchain() {
   const blockchainList = result.records
 
   if (currBlockchainId) {
-    let len = blockchainList.filter(item => item.id === currBlockchainId).length
+    let len = blockchainList.filter((item) => item.id === currBlockchainId).length
 
     if (len === 0) {
       localStorage.setItem('currBlockchainId', blockchainList[0].id)
@@ -70,5 +70,39 @@ initTheme()
 <template>
   <ElConfigProvider v-if="isInitialized" :locale="locale">
     <router-view />
+
+    <footer class="footer">
+      <div class="footer-content">
+        <a href="/privacyPolicy" target="_blank" class="footer-link">Privacy Policy</a>
+        <span class="footer-copyright">&copy; 2024 HYPERDUST FOUNDATION LTD.. All rights reserved.</span>
+      </div>
+    </footer>
   </ElConfigProvider>
 </template>
+<style scoped>
+.footer {
+  background-color: #333; /* 更改为深色背景 */
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-link {
+  color: #fff; /* 更改为浅色文字 */
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  color: #aaa; /* 更改为浅色文字 */
+  font-size: 14px;
+}
+</style>
