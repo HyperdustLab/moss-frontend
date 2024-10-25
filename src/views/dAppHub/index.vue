@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: #141414">
-      <div style="display: flex; justify-content: space-between">
-        <img @click="href('https://www.hyperagi.network/')" style="width: 240px; height: 60px" :src="logo" />
-
-        <el-dropdown @command="handleCommand" class="custom-dropdown w-50 ml-330">
-          <span class="el-dropdown-link" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
+    <div class="fixed top-0 left-0 w-full z-1000 bg-[#141414]">
+      <div class="flex justify-between">
+        <img @click="href('https://www.hyperagi.network/')" class="w-60 h-15" :src="logo" />
+        <el-dropdown @command="handleCommand" class="bg-[#303133] rounded-full mt-3.75 h-7 w-40 ml-auto mr-20">
+          <span class="el-dropdown-link mt-[-5px] flex items-center">
             <el-avatar :size="13" :src="currBlockchain.icon" />
 
-            <span style="margin-left: 10px">{{ currBlockchain.name }}</span>
+            <span class="ml-2.5">{{ currBlockchain.name }}</span>
 
             <el-icon size="13" class="el-icon--right">
               <arrow-down />
@@ -19,18 +18,18 @@
               <el-dropdown-item v-for="(item, index) in blockchainList" :command="item.id" :style="{ 'margin-top': index === 0 ? '5px' : '10px' }" :key="index">
                 <el-avatar :size="25" :src="item.icon" />
 
-                <span style="font-size: 13px; margin-left: 10px"> {{ item.name }}</span>
+                <span class="text-sm ml-2.5"> {{ item.name }}</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
 
-        <el-dropdown v-if="user.token" style="margin-left: 10px; width: 200px" class="custom-dropdown">
-          <span class="el-dropdown-link" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
+        <el-dropdown v-if="user.token" class="bg-[#303133] rounded-full mt-3.75 h-7 w-50">
+          <span class="el-dropdown-link mt-[-5px] flex items-center">
             <el-avatar :size="16" :src="user.avatar" />
 
-            <span style="margin-left: 5px">
-              <Substring :copys="false" color="#ffffff" fontSize="13px" :value="user.walletAddress || user.username"></Substring>
+            <span class="ml-1.25">
+              <Substring :copys="false" color="#ffffff" fontSize="13px" :value="user.walletAddress || user.email"></Substring>
             </span>
 
             <el-icon size="13" class="el-icon--right">
@@ -38,70 +37,68 @@
             </el-icon>
           </span>
           <template #dropdown>
-            <el-card style="width: 200px">
+            <el-card class="w-50">
               <template #header>
-                <div class="card-header" style="display: flex; align-items: center">
+                <div class="card-header flex items-center">
                   <el-avatar :size="25" :src="user.avatar" />
 
-                  <span style="margin-left: 15px">
-                    <Substring color="#ffffff" fontSize="12px" :value="user.walletAddress || user.username"></Substring>
+                  <span class="ml-3.75">
+                    <Substring color="#ffffff" fontSize="12px" :value="userStore.walletAddress || userStore.email"></Substring>
                   </span>
                 </div>
               </template>
 
-              <p style="margin-left: 5px; display: flex; align-items: center">
+              <p class="ml-1.25 flex items-center">
                 <el-icon size="20">
                   <User />
                 </el-icon>
 
-                <el-button type="plain" @click="goHome" style="font-size: 12px" link>{{ $t('index.dashboard') }}</el-button>
+                <el-button type="plain" @click="goHome" class="text-xs" link>{{ $t('index.dashboard') }}</el-button>
               </p>
 
-              <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
+              <p class="ml-1.25 flex items-center mt-7.5">
                 <SvgIcon width="1.5em" height="1.5em" name="email" />
 
-                <el-button type="plain" @click="showBindEmail" style="font-size: 12px" link>
+                <el-button type="plain" @click="showBindEmail" class="text-xs" link>
                   {{ user.email || 'Bind Email' }}
                 </el-button>
               </p>
 
-              <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
-                <el-image :src="logoutPng" style="width: 20px; height: 20px"></el-image>
+              <p class="ml-1.25 flex items-center mt-7.5">
+                <el-image :src="logoutPng" class="w-5 h-5"></el-image>
 
-                <el-button type="plain" @click="disconnect" style="font-size: 12px" link>{{ $t('index.disconnect') }}</el-button>
+                <el-button type="plain" @click="disconnect" class="text-xs" link>{{ $t('index.disconnect') }}</el-button>
               </p>
             </el-card>
           </template>
         </el-dropdown>
 
-        <el-dropdown v-else style="margin-left: 10px; width: 160px; float: right" trigger="contextmenu" class="custom-dropdown">
-          <span class="el-dropdown-link" @click="metamaskLogin" style="margin-top: -5px; display: flex; align-items: center; margin-left: 20px">
-            <el-avatar :size="16" :src="metamask" />
-
-            <span style="margin-left: 6px">{{ $t('index.connectWallet') }}</span>
+        <el-dropdown v-else class="bg-[#303133] rounded-full mt-3.75 h-7 w-30 float-right" trigger="contextmenu">
+          <span class="mt-[-5px] flex items-center ml-20%" @click="showLogin">
+            <span class="ml-1.5 text-center">Login</span>
           </span>
         </el-dropdown>
       </div>
     </div>
 
     <div class="app-container">
-      <el-carousel indicator-position="none" height="600px" :interval="5000">
+      <el-carousel indicator-position="none" class="h-150" :interval="5000">
         <el-carousel-item v-for="(item, index) in bannerList" :key="index">
-          <div style="width: 100%">
-            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted style="width: 100%" autoplay />
+          <div class="w-full">
+            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted class="w-full" autoplay />
           </div>
         </el-carousel-item>
       </el-carousel>
 
-      <el-card v-loading="loading" shadow="never" style="background-color: #010001">
+      <el-card v-loading="loading" shadow="never" class="bg-[#010001]">
         <div class="toolbar-wrapper">
           <div>
-            <el-row style="margin-top: 40px">
+            <el-row class="mt-10">
               <el-col :span="24">
-                <div style="margin-left: 13%">
-                  <span style="font-size: 20px; font-weight: 100; margin-left: 30%">Hyperspace Scan</span>
+                <div class="ml-3.25">
+                  <span class="text-2xl font-thin ml-7.5">Hyperspace Scan</span>
                   <br />
-                  <el-input v-model="searchData.searchTxt" :placeholder="$t('index.searchSpaceTxt')" clearable style="width: 1300px; height: 50px; margin-left: 10px; margin-top: 20px; background-color: #1d1e1f" size="large" class="rounded-search" @clear="handleSearch" @keyup.enter="handleSearch">
+                  <el-input v-model="searchData.searchTxt" :placeholder="$t('index.searchSpaceTxt')" clearable class="rounded-search w-[1300px] h-12.5 ml-2.5 mt-5 bg-[#1d1e1f]" size="large" @clear="handleSearch" @keyup.enter="handleSearch">
                     <template #append>
                       <el-button :icon="Search" @click="handleSearch" />
                     </template>
@@ -110,23 +107,23 @@
               </el-col>
             </el-row>
 
-            <el-row style="margin-top: 60px">
+            <el-row class="mt-15">
               <el-col :span="24">
                 <AppTypeList @open="handleSelectAppType"></AppTypeList>
               </el-col>
             </el-row>
 
-            <el-row style="margin-top: 20px">
+            <el-row class="mt-5">
               <el-col v-for="(item, index) in tableData" :span="8" :key="index">
-                <el-card style="width: 97%; margin-top: 20px" :body-style="{ padding: '0px' }" @click="openApp(item.sid)">
+                <el-card class="w-[97%] mt-5" :body-style="{ padding: '0px' }" @click="openApp(item.sid)">
                   <GlobeAppImage :value="item.coverImage" :image="item.image" :key="index"></GlobeAppImage>
-                  <div style="padding: 14px">
-                    <span style="font-size: 20px; font-weight: 1000"
+                  <div class="p-3.5">
+                    <span class="text-2xl font-extrabold"
                       >{{ item.name }}
 
                       <el-popover placement="right" :width="400" trigger="hover">
                         <template #reference>
-                          <el-icon style="cursor: pointer; float: right"><Share /></el-icon>
+                          <el-icon class="cursor-pointer float-right"><Share /></el-icon>
                         </template>
 
                         <HShare :url="getHyperdustEpoch(item)" :title="item.name" :image="item.coverImage.split(',')[0]"></HShare>
@@ -169,12 +166,16 @@
 
     <BindEmail ref="bindEmail"></BindEmail>
 
-    <el-backtop :right="100" :bottom="100" />
+    <el-backtop :right="25" :bottom="25" />
+
+    <Login ref="loginRef"></Login>
+
+    <IntroductionBindAccount ref="introductionBindAccountRef"></IntroductionBindAccount>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, reactive, ref, watch, onMounted } from 'vue'
+import { onBeforeMount, reactive, ref, watch, onMounted, nextTick } from 'vue'
 
 import { type GetTableData } from '@/api/table/types/table'
 import { type FormInstance } from 'element-plus'
@@ -188,6 +189,8 @@ import logo from '@/assets/layouts/logo-text-1.png?url'
 
 import { Search } from '@element-plus/icons-vue'
 
+import Login from '@/components/login/index.vue'
+
 import AppTypeList from './appTypeList.vue'
 
 import Substring from '@/components/substring.vue'
@@ -198,18 +201,24 @@ import BindEmail from '@/layouts/components/NavigationBar/BindEmail.vue'
 
 import logoutPng from '@/assets/image/logout.png?url'
 
-import metamask from '@/assets/image/metamask.png?url'
-
 import HShare from '@/components/Share.vue'
 import GlobeApp from '@/components/GlobeApp.vue'
 
+import IntroductionBindAccount from '@/components/IntroductionBindAccount/index.vue'
+
+import { getBindStatus } from '@/api/login'
+
 let observer = null
+
+const userStore = useUserStore()
+
+const loginRef = ref(null)
 
 const observerElement = ref(null)
 
 const bannerList = ref([])
 
-import { metamaskLogin } from '@/api/login'
+const introductionBindAccountRef = ref(null)
 
 const searchData = reactive({
   status: 'Y',
@@ -242,6 +251,18 @@ onMounted(() => {
   }
 
   getTableData()
+
+  nextTick(async () => {
+    if (userStore.token) {
+      const bindStatus = await getBindStatus()
+
+      console.info('bindStatus:', bindStatus)
+
+      if (bindStatus !== 'none') {
+        introductionBindAccountRef.value.show(bindStatus)
+      }
+    }
+  })
 })
 
 const user = useUserStore()
@@ -267,6 +288,10 @@ onBeforeMount(async () => {
   await getBlockchainList()
   handleCommand(currBlockchainId.value)
 })
+
+function showLogin() {
+  loginRef.value.show()
+}
 
 function handleFeaturedProduct(item) {
   openApp(item.parameter)
@@ -377,10 +402,7 @@ function showBindEmail() {
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  box-shadow:
-    0 0 0 0 var(--el-input-border-color) inset,
-    0 0 0 0 var(--el-input-border-color) inset,
-    0 0 0 0 var(--el-input-border-color) inset;
+  box-shadow: 0 0 0 0 var(--el-input-border-color) inset, 0 0 0 0 var(--el-input-border-color) inset, 0 0 0 0 var(--el-input-border-color) inset;
 }
 
 :deep .el-input__wrapper {
@@ -472,13 +494,6 @@ function showBindEmail() {
   font-size: 14px;
 
   padding-left: 6%;
-}
-
-.custom-dropdown {
-  background-color: #303133;
-  border-radius: 9999px;
-  margin-top: 15px;
-  height: 30px;
 }
 
 .loading-indicator {

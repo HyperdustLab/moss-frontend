@@ -142,7 +142,7 @@ function onClose() {
 async function handleMetamaskLogin() {
   await metamaskLogin()
 
-  location.href = '/'
+  location.reload()
 }
 
 function isValidEmail(email: string) {
@@ -189,7 +189,7 @@ async function emailLogin() {
 
   await useUserStore().loginToken(result.token)
 
-  location.href = '/'
+  location.reload()
 }
 
 defineExpose({
@@ -213,7 +213,7 @@ function handleMessage(event: any) {
 
     if (json.token) {
       useUserStore().loginToken(json.token)
-      location.href = '/'
+      location.reload()
     }
   } catch (e) {
     isJsonString = false

@@ -4,16 +4,8 @@
       <el-image style="width: 100%; height: 100px" :src="logo" fit="contain" />
 
       <el-form label-width="120px" style="margin-top: 12%; margin-left: 10%">
-        <el-form-item>
-          <span style="font-size: 16px">
-            {{ $t('doesNotOwnHYPT') }}
-          </span>
-        </el-form-item>
-
         <el-form-item label-width="0px" style="margin-right: 6%; margin-top: 10%">
-          <div style="cursor: pointer" @click="handleOK" class="btn flex-center ma">
-            {{ $t('selectreSourceType.browseMap') }}
-          </div>
+          <div style="cursor: pointer" @click="handleOK" class="btn flex-center ma">Launch</div>
         </el-form-item>
       </el-form>
     </div>
@@ -56,12 +48,6 @@ async function show(item, _parameter) {
     const user = useUserStore()
     const currBlockchainId = localStorage.getItem('currBlockchainId')
 
-    const Hyperdust_Token = await buildContract(currBlockchainId, 'Hyperdust_Token')
-
-    const b = await Hyperdust_Token.balanceOf(user.walletAddress)
-
-    balance.value = parseInt(b)
-
     app.value = item
 
     gLoading.close()
@@ -74,11 +60,7 @@ async function show(item, _parameter) {
 }
 
 async function handleOK() {
-  if (balance.value > 0) {
-    location.href = `/Hyperdust/epoch/${app.value.sid}${parameter ? '?parameter=' + parameter : ''}`
-  } else {
-    ElMessage.warning(t('doesNotOwnHYPTTxt'))
-  }
+  location.href = `/Hyperdust/epoch/${app.value.sid}${parameter ? '?parameter=' + parameter : ''}`
 }
 
 defineExpose({

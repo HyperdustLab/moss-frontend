@@ -49,7 +49,7 @@ async function verificationToken() {
   if (result) {
     await useUserStore().getInfo()
   } else {
-    useUserStore.logout()
+    await useUserStore().logout()
   }
 }
 
