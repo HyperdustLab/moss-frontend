@@ -82,10 +82,10 @@
     </div>
 
     <div class="app-container">
-      <el-carousel indicator-position="none" class="h-150" :interval="5000">
-        <el-carousel-item v-for="(item, index) in bannerList" :key="index">
-          <div class="w-full">
-            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted class="w-full" autoplay />
+      <el-carousel indicator-position="none" height="30rem" :interval="5000">
+        <el-carousel-item class="h-120" v-for="(item, index) in bannerList" :key="index">
+          <div class="h-200">
+            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted class="h-200" autoplay />
           </div>
         </el-carousel-item>
       </el-carousel>
