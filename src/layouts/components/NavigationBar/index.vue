@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAppStore } from '@/store/modules/app'
@@ -15,6 +15,9 @@ import Notify from '@/components/Notify/index.vue'
 import { DeviceEnum } from '@/constants/app-key'
 import UploadAvatar from './uploadAvatar.vue'
 import BindEmail from './BindEmail.vue'
+import IntroductionBindAccount from '@/components/IntroductionBindAccount/index.vue'
+
+import { getBindStatus } from '@/api/login'
 
 import Login from '@/components/login/index.vue'
 
@@ -22,17 +25,18 @@ import api from '@/utils/api'
 
 import Substring from '@/components/substring.vue'
 
-import { metamaskLogin } from '@/api/login'
+import BindAccount from './BindAccount.vue'
 
 import logoutPng from '@/assets/image/logout.png?url'
 
-import metamask from '@/assets/image/metamask.png?url'
-import invitationCode from '@/assets/image/invitationCode.png?url'
+const introductionBindAccountRef = ref(null)
 
 const router = useRouter()
 const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()
+
+const bindAccountRef = ref(null)
 
 const loginRef = ref(null)
 
@@ -70,10 +74,26 @@ async function getBlockchainList() {
   blockchainList.value = result.records
 }
 
+function showBindAccount() {
+  bindAccountRef.value.show()
+}
+
 onMounted(async () => {
   await getBlockchainList()
 
   currBlockchain.value = blockchainList.value.filter((item) => item.id === currBlockchainId.value)[0]
+
+  nextTick(async () => {
+    if (userStore.token) {
+      const bindStatus = await getBindStatus()
+
+      console.info('bindStatus:', bindStatus)
+
+      if (bindStatus !== 'none') {
+        introductionBindAccountRef.value.show(bindStatus)
+      }
+    }
+  })
 })
 
 function handleCommand(command) {
@@ -134,7 +154,7 @@ function showLogin() {
           <el-avatar :size="16" :src="userStore.avatar" />
 
           <span style="margin-left: 5px">
-            <Substring :copys="false" color="#ffffff" fontSize="13px" :value="userStore.walletAddress || userStore.username"></Substring>
+            <Substring :copys="false" color="#ffffff" fontSize="13px" :value="userStore.walletAddress || userStore.email"></Substring>
           </span>
 
           <el-icon size="13" class="el-icon--right">
@@ -148,7 +168,7 @@ function showLogin() {
                 <el-avatar :size="25" :src="userStore.avatar" />
 
                 <span style="margin-left: 15px">
-                  <Substring color="#ffffff" fontSize="12px" :value="userStore.walletAddress || userStore.username"></Substring>
+                  <Substring color="#ffffff" fontSize="12px" :value="userStore.walletAddress || userStore.email"></Substring>
                 </span>
               </div>
             </template>
@@ -161,6 +181,12 @@ function showLogin() {
               <el-button type="plain" @click="goHome" style="font-size: 12px" link>
                 {{ $t('index.dashboard') }}
               </el-button>
+            </p>
+
+            <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
+              <SvgIcon width="1.5em" height="1.5em" name="email" />
+
+              <el-button type="plain" @click="showBindAccount" style="font-size: 12px" link> Bind / Unbind </el-button>
             </p>
 
             <p style="margin-left: 5px; display: flex; align-items: center; margin-top: 30px">
@@ -214,6 +240,9 @@ function showLogin() {
     <BindEmail ref="bindEmail"></BindEmail>
 
     <Login ref="loginRef"></Login>
+
+    <BindAccount ref="bindAccountRef"></BindAccount>
+    <IntroductionBindAccount ref="introductionBindAccountRef"></IntroductionBindAccount>
   </div>
 </template>
 

@@ -56,3 +56,19 @@ export async function metamaskLogin() {
 
   await useUserStore().getInfo()
 }
+
+export async function getBindStatus() {
+  const userStore = useUserStore()
+
+  if (!userStore.walletAddress) {
+    return 'metamask'
+  }
+
+  const { result } = await api.get('/sys/user/listMyBindAccount', {})
+
+  if (!userStore.email && !result.some((item) => item === 'google')) {
+    return 'email'
+  }
+
+  return 'none'
+}

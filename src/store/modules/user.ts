@@ -10,6 +10,7 @@ import { loginApi, getUserInfoApi } from '@/api/login'
 import { type LoginRequestData } from '@/api/login/types/login'
 import { type RouteRecordRaw } from 'vue-router'
 import asyncRouteSettings from '@/config/async-route'
+import api from '@/utils/api'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref<string>(getToken() || '')
@@ -65,7 +66,13 @@ export const useUserStore = defineStore('user', () => {
     _resetTagsView()
   }
   /** 登出 */
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await api.get('/sys/logout', {})
+    } catch (error) {
+      console.log(error)
+    }
+
     removeToken()
     token.value = ''
     roles.value = []
