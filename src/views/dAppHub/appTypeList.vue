@@ -15,7 +15,7 @@ const emit = defineEmits(['open'])
 const appTypeList = ref([{ id: '', name: 'All' }])
 
 onBeforeMount(async () => {
-  const { result } = await api.get('/mgn/appType/list', { pageSize: -1 })
+  const { result } = await api.get('/mgn/appType/list', { pageSize: -1, column: 'orderNum', order: 'asc' })
 
   appTypeList.value.push(...result.records)
 })

@@ -51,7 +51,7 @@ onBeforeMount(async () => {
 
 onMounted(() => {
   observer = new IntersectionObserver(
-    entries => {
+    (entries) => {
       const [entry] = entries
       if (entry.isIntersecting) {
         loadMoreItems()
@@ -159,7 +159,7 @@ function handleFeaturedProduct(item) {
             </template>
           </el-table-column>
 
-          <el-table-column prop="blockchain.name" :label="t('minerNode.blockchainNetwork')" align="center"> </el-table-column>
+          <el-table-column prop="blockchainId_dictText" :label="t('minerNode.blockchainNetwork')" align="center"> </el-table-column>
 
           <el-table-column prop="serviceStatus_dictText" :label="t('minerNode.serviceStatus')" align="center"> </el-table-column>
         </el-table>

@@ -41,7 +41,7 @@ const { paginationData, handleCurrentChange, handleSizeChange } = usePagination(
 
 onMounted(() => {
   observer = new IntersectionObserver(
-    entries => {
+    (entries) => {
       const [entry] = entries
       if (entry.isIntersecting) {
         loadMoreItems()

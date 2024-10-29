@@ -63,7 +63,6 @@ export const constantRoutes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
-
   {
     path: '/privacyPolicy',
     component: () => import('@/views/privacyPolicy/index.vue'),
@@ -74,9 +73,9 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/SelfEvolvableAgent',
+    path: '/Agent',
     component: () => import('@/views/agent/index.vue'),
-    name: 'SelfEvolvableAgent',
+    name: 'Agent',
     meta: {
       hidden: true,
     },
@@ -166,45 +165,30 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/agent/index.vue'),
         name: 'agent',
         meta: {
-          title: t('menu.agent'),
+          title: 'Agent',
           svgIcon: 'Agent',
           keepAlive: true,
         },
       },
     ],
   },
-  {
-    path: '/_dAppHub',
-    children: [
-      {
-        path: location.origin + '/dAppHub',
-        component: () => {},
-        name: '_dAppHub',
-        meta: {
-          title: t('menu.dAppHub'),
-          svgIcon: 'HUB',
-          keepAlive: true,
-        },
-      },
-    ],
-  },
-  {
-    path: '/faucet',
-    component: Layouts,
-    redirect: '/faucet/index',
-    children: [
-      {
-        path: '/faucet/index',
-        component: () => import('@/views/faucet/index.vue'),
-        name: 'faucetIndex',
-        meta: {
-          title: t('menu.faucet'),
-          svgIcon: 'FAUCET',
-          keepAlive: true,
-        },
-      },
-    ],
-  },
+  // {
+  //   path: '/faucet',
+  //   component: Layouts,
+  //   redirect: '/faucet/index',
+  //   children: [
+  //     {
+  //       path: '/faucet/index',
+  //       component: () => import('@/views/faucet/index.vue'),
+  //       name: 'faucetIndex',
+  //       meta: {
+  //         title: t('menu.faucet'),
+  //         svgIcon: 'FAUCET',
+  //         keepAlive: true,
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: '/help',
     component: Layouts,

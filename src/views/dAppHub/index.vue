@@ -96,9 +96,7 @@
             <el-row class="mt-10">
               <el-col :span="24">
                 <div class="ml-3.25">
-                  <span class="text-2xl font-thin ml-7.5">Hyperspace Scan</span>
-                  <br />
-                  <el-input v-model="searchData.searchTxt" :placeholder="$t('index.searchSpaceTxt')" clearable class="rounded-search w-[1300px] h-12.5 ml-2.5 mt-5 bg-[#1d1e1f]" size="large" @clear="handleSearch" @keyup.enter="handleSearch">
+                  <el-input v-model="searchData.searchTxt" placeholder="Please enter SID（Space lD） or name to find more games" clearable class="rounded-search w-[1300px] h-12.5 ml-2.5 mt-5 bg-[#1d1e1f]" size="large" @clear="handleSearch" @keyup.enter="handleSearch">
                     <template #append>
                       <el-button :icon="Search" @click="handleSearch" />
                     </template>
@@ -185,7 +183,7 @@ import { useUserStore } from '@/store/modules/user'
 
 import api from '@/utils/api'
 
-import logo from '@/assets/layouts/logo-text-1.png?url'
+import logo from '@/assets/layouts/logo-text-2.png?url'
 
 import { Search } from '@element-plus/icons-vue'
 

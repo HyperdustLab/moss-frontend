@@ -8,7 +8,7 @@
             <div class="p-6 sm:p-16 h-full">
               <div class="space-y-4">
                 <img :src="logoIcon" loading="lazy" class="w-10" alt="tailus logo" />
-                <h2 class="mb-8 text-2xl font-bold" style="color: #4ceb75">Sign in to unlock the best of HyperAIG.</h2>
+                <h2 class="mb-8 text-2xl font-bold" style="color: #4ceb75">Sign in to unlock the best of HyperAGI.</h2>
               </div>
 
               <div class="mt-16 grid space-y-4">
