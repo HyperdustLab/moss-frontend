@@ -56,8 +56,10 @@
               </div>
 
               <div class="mt-32 space-y-4 text-gray-400 text-center sm:-mb-8">
-                <p class="text-xs">By proceeding, you agree to our <a href="#" class="underline">Terms of Use</a> and confirm you have read our <a href="#" class="underline">Privacy and Cookie Statement</a>.</p>
-                <p class="text-xs">This site is protected by reCAPTCHA and the <a href="#" class="underline">Google Privacy Policy</a> and <a href="#" class="underline">Terms of Service</a> apply.</p>
+                <p class="text-xs">
+                  By proceeding, you agree to our <a href="https://policies.google.com/terms" class="underline" target="_blank">Terms of Use</a> and confirm you have read our <a href="https://policies.google.com/privacy" class="underline" target="_blank">Privacy and Cookie Statement</a>.
+                </p>
+                <p class="text-xs">This site is protected by reCAPTCHA and the <a href="https://policies.google.com/privacy" class="underline" target="_blank">Google Privacy Policy</a> and <a href="https://policies.google.com/terms" class="underline" target="_blank">Terms of Service</a> apply.</p>
               </div>
             </div>
           </div>

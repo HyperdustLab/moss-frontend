@@ -2,7 +2,16 @@
   <div>
     <div class="fixed top-0 left-0 w-full z-1000 bg-[#141414]">
       <div class="flex justify-between">
-        <img @click="href('https://www.hyperagi.network/')" class="w-60 h-15" :src="logo" />
+        <img @click="href('https://www.hyperagi.network/')" class="w-50 h-15" :src="logo" />
+
+        <div class="flex justify-center w-full">
+          <el-menu mode="horizontal" class="bg-[#141414] w-120">
+            <el-menu-item @click="nftCrossChainRef.show()" class="!mr-12" style="text-decoration: none">NFT Bridge</el-menu-item>
+            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/testnet-docs-and-guides/', '_blank')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
+            <el-menu-item @click="open('https://explorer.hyperagi.network/', '_blank')" class="!mr-12" style="text-decoration: none">Blockchain Explorer</el-menu-item>
+          </el-menu>
+        </div>
+
         <el-dropdown @command="handleCommand" class="bg-[#303133] rounded-full mt-3.75 h-7 w-40 ml-auto mr-20">
           <span class="el-dropdown-link mt-[-5px] flex items-center">
             <el-avatar :size="13" :src="currBlockchain.icon" />
@@ -169,6 +178,8 @@
     <Login ref="loginRef"></Login>
 
     <IntroductionBindAccount ref="introductionBindAccountRef"></IntroductionBindAccount>
+
+    <NftCrossChain ref="nftCrossChainRef"></NftCrossChain>
   </div>
 </template>
 
@@ -204,6 +215,8 @@ import GlobeApp from '@/components/GlobeApp.vue'
 
 import IntroductionBindAccount from '@/components/IntroductionBindAccount/index.vue'
 
+import NftCrossChain from '@/views/NftCrossChain/AddForm.vue'
+
 import { getBindStatus } from '@/api/login'
 
 let observer = null
@@ -215,6 +228,8 @@ const loginRef = ref(null)
 const observerElement = ref(null)
 
 const bannerList = ref([])
+
+const nftCrossChainRef = ref(null)
 
 const introductionBindAccountRef = ref(null)
 
@@ -286,6 +301,10 @@ onBeforeMount(async () => {
   await getBlockchainList()
   handleCommand(currBlockchainId.value)
 })
+
+function open(url) {
+  window.open(url, '_blank')
+}
 
 function showLogin() {
   loginRef.value.show()

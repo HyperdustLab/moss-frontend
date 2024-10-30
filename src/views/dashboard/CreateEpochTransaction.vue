@@ -1,14 +1,14 @@
 <template>
-  <el-dialog v-model="visible" style="pointer-events: auto" width="35%" :title="$t('selectSourceType.title')">
-    <div style="height: 30rem">
-      <el-image style="width: 100%; height: 100px" :src="logo" fit="contain" />
+  <el-dialog v-model="visible" class="pointer-events-auto" width="35%" title="Play from cloud of HyperAGI">
+    <div class="h-120">
+      <el-image class="w-full h-25" :src="logo" fit="contain" />
 
-      <el-form :model="form" label-width="180px" style="margin-top: 12%; margin-left: 10%">
-        <el-form-item style="margin-left: 5%" label="Epoch">
+      <el-form :model="form" class="mt-50 ml-10">
+        <el-form-item class="ml-51" label="Epoch">
           <template #label>
             <el-tooltip class="box-item" effect="dark" :content="$t('selectSourceType.epochTxt')" placement="top-start">
-              <span
-                >{{ $t('selectSourceType.durationUnit') }}
+              <span>
+                Epoch
                 <el-icon>
                   <QuestionFilled />
                 </el-icon>
@@ -18,10 +18,10 @@
           <el-input-number v-if="epochMaxNum" v-model="form.epoch" @change="calculateCommission" :min="1" :max="epochMaxNum" />
         </el-form-item>
 
-        <el-form-item style="margin-left: 19%; margin-top: 5%" label="Est HyperGas Fee：">
+        <el-form-item class="ml-51 mt-5" label="Est HyperGas Fee：">
           <el-tooltip class="box-item" effect="dark" content="The actual payment amount is based on the current network difficulty" placement="top-start">
-            <span
-              >{{ toAccountAmount(totalPrice) }}HYPT
+            <span>
+              {{ toAccountAmount(totalPrice) }}HYPT
               <el-icon>
                 <QuestionFilled />
               </el-icon>
@@ -29,17 +29,17 @@
           </el-tooltip>
         </el-form-item>
 
-        <el-form-item label-width="0px" style="margin-right: 6%; margin-top: 10%">
-          <div style="cursor: pointer" @click="handleOK" class="btn flex-center ma">
+        <el-form-item label-width="0px" class="mr-6 mt-50">
+          <div class="cursor-pointer btn flex-center ma" @click="handleOK">
             {{ $t('selectSourceType.browseMap') }}
           </div>
         </el-form-item>
 
-        <el-form-item label-width="0px" style="margin-left: 20%">
-          <div style="text-align: center">
-            {{ $t('selectSourceType.title1') }}
-
-            <a style="margin-left: 5px; color: #409eff" :href="toGetHYPT()" target="_blank">{{ $t('selectSourceType.title2') }}</a>
+        <el-form-item label-width="0px" class="ml-51">
+          <div class="text-center mt-5">
+            Need assistance? Click
+            <a class="ml-2 text-blue-500 underline" href="https://hyperdust-foundation.gitbook.io/hyperagi-docs-and-guides" target="_blank">here</a>
+            for help.
           </div>
         </el-form-item>
       </el-form>
@@ -55,7 +55,7 @@ import { buildContract, exceptionHandling, checkBalance, toAccountAmount, second
 
 import { ethers } from 'ethers'
 
-import logo from '@/assets/layouts/logo.png?url'
+import logo from '@/assets/layouts/logo.gif?url'
 
 import { useI18n } from 'vue-i18n'
 

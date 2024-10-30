@@ -212,29 +212,12 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: '/Explore/index',
     children: [
       {
-        path: 'https://block-testnet.hyperagi.network/',
+        path: 'https://explorer.hyperagi.network/',
         component: () => {},
         name: 'Explore',
         meta: {
           title: 'Explore',
           svgIcon: 'Explore',
-          keepAlive: true,
-        },
-      },
-    ],
-  },
-  {
-    path: '/Explore',
-    component: Layouts,
-    redirect: '/Explore/index',
-    children: [
-      {
-        path: '/NftCrossChain/index',
-        component: () => import('@/views/NftCrossChain/AddForm.vue'),
-        name: 'faucet',
-        meta: {
-          title: 'Nft Cross Chain',
-          svgIcon: 'NftCrossChain',
           keepAlive: true,
         },
       },
