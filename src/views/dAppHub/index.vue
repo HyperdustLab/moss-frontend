@@ -91,10 +91,10 @@
     </div>
 
     <div class="app-container">
-      <el-carousel indicator-position="none" height="30rem" :interval="5000">
-        <el-carousel-item class="h-120" v-for="(item, index) in bannerList" :key="index">
-          <div class="h-200">
-            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted class="h-200" autoplay />
+      <el-carousel indicator-position="none" height="40rem" :interval="5000">
+        <el-carousel-item class="h-220" v-for="(item, index) in bannerList" :key="index">
+          <div>
+            <video @click="handleBanner(item)" loop :src="item.text.split(',')[0]" muted autoplay />
           </div>
         </el-carousel-item>
       </el-carousel>
@@ -171,8 +171,6 @@
 
     <GlobeApp ref="globeApp"></GlobeApp>
 
-    <BindEmail ref="bindEmail"></BindEmail>
-
     <el-backtop :right="25" :bottom="25" />
 
     <Login ref="loginRef"></Login>
@@ -205,8 +203,6 @@ import AppTypeList from './appTypeList.vue'
 import Substring from '@/components/substring.vue'
 
 import GlobeAppImage from '../../../globeAppImage.vue'
-
-import BindEmail from '@/layouts/components/NavigationBar/BindEmail.vue'
 
 import logoutPng from '@/assets/image/logout.png?url'
 
@@ -241,8 +237,6 @@ const searchData = reactive({
   active: true,
   searchTxt: '',
 })
-
-const bindEmail = ref(null)
 
 onMounted(() => {
   observer = new IntersectionObserver(
@@ -406,7 +400,7 @@ function href(url) {
 }
 
 function showBindEmail() {
-  bindEmail.value.show()
+  introductionBindAccountRef.value.show('email')
 }
 
 //#endregion

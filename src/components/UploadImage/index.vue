@@ -31,7 +31,7 @@ onBeforeMount(() => {
   if (props.modelValue) {
     const array = props.modelValue.split(',')
 
-    fileList.value = array.map(i => {
+    fileList.value = array.map((i) => {
       return { name: i, url: i }
     })
   }
@@ -43,7 +43,9 @@ const emit = defineEmits(['update:modelValue'])
 
 import api from '@/utils/api'
 
-const action = api.getBaseURL() + props.action || '/sys/common/upload'
+const action = api.getBaseURL() + (props.action || '/sys/common/upload')
+
+console.info(action)
 
 const headers = {
   'X-Access-Token': getToken(),
@@ -62,7 +64,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile, upl
 
   console.info(uploadFiles)
 
-  const fileURLList = uploadFiles.map(item => item.response.message)
+  const fileURLList = uploadFiles.map((item) => item.response.message)
 
   const files = fileURLList.join(',')
 

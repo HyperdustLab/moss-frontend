@@ -108,7 +108,7 @@ function showUploadAvatar() {
 }
 
 function showBindEmail() {
-  bindEmail.value.show()
+  introductionBindAccountRef.value.show('email')
 }
 
 function showLogin() {
@@ -174,10 +174,10 @@ function showLogin() {
               <el-button type="plain" @click="goHome" class="text-xs" link>{{ $t('index.dashboard') }}</el-button>
             </p>
 
-            <p class="ml-1.25 flex items-center mt-7.5">
+            <!-- <p class="ml-1.25 flex items-center mt-7.5">
               <SvgIcon width="1.5em" height="1.5em" name="email" />
               <el-button type="plain" @click="showBindAccount" class="text-xs" link> Bind / Unbind </el-button>
-            </p>
+            </p> -->
 
             <p class="ml-1.25 flex items-center mt-7.5">
               <SvgIcon width="1.5em" height="1.5em" name="email" />
@@ -221,7 +221,6 @@ function showLogin() {
     </div>
 
     <UploadAvatar ref="uploadAvatar"></UploadAvatar>
-    <BindEmail ref="bindEmail"></BindEmail>
     <Login ref="loginRef"></Login>
     <BindAccount ref="bindAccountRef"></BindAccount>
     <IntroductionBindAccount ref="introductionBindAccountRef"></IntroductionBindAccount>

@@ -3,6 +3,10 @@
     <CreateEpochTransaction ref="createEpochTransaction"></CreateEpochTransaction>
 
     <Epoch2DRender ref="epoch2DRender"></Epoch2DRender>
+
+    <IntroductionBindAccount ref="introductionBindAccountRef"></IntroductionBindAccount>
+
+    <Login ref="loginRef"></Login>
   </div>
 </template>
 
@@ -12,16 +16,27 @@ import Epoch2DRender from '@/views/dashboard/Epoch2DRender.vue'
 
 import { metamaskLogin } from '@/api/login'
 
-import { useUserStore } from '@/store/modules/user'
-
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import api from '@/utils/api'
 import { ElLoading } from 'element-plus'
 
+import { getBindStatus } from '@/api/login'
+
+import IntroductionBindAccount from '@/components/IntroductionBindAccount/index.vue'
+
+import Login from '@/components/login/index.vue'
+
 const createEpochTransaction = ref(null)
 
 const epoch2DRender = ref(null)
+
+const introductionBindAccountRef = ref(null)
+import { useUserStore } from '@/store/modules/user'
+
+const userStore = useUserStore()
+
+const loginRef = ref(null)
 
 let gLoading = null
 
@@ -38,10 +53,18 @@ async function openApp(sid, parameter) {
 
   gLoading.close()
 
-  const user = useUserStore()
+  if (userStore.token) {
+    const bindStatus = await getBindStatus()
 
-  if (!user.username) {
-    await metamaskLogin()
+    console.info('bindStatus:', bindStatus)
+
+    if (bindStatus !== 'none') {
+      introductionBindAccountRef.value.show(bindStatus)
+      return
+    }
+  } else {
+    loginRef.value.show()
+    return
   }
 
   if (item.type === '1') {
