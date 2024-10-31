@@ -7,7 +7,9 @@
           <div class="rounded-xl shadow-xl h-full">
             <div class="p-6 sm:p-16 h-full">
               <div class="space-y-4">
-                <img :src="logoIcon" loading="lazy" class="w-10" alt="tailus logo" />
+                <img v-if="currentRoute === '/dAppHub'" :src="logoIcon1" loading="lazy" class="w-10" alt="tailus logo" />
+                <img v-else :src="logoIcon" loading="lazy" class="w-10" alt="tailus logo" />
+
                 <h2 class="mb-8 text-2xl font-bold" style="color: #4ceb75">Sign in to unlock the best of HyperAGI.</h2>
               </div>
 
@@ -73,6 +75,7 @@
 import metamaskIcon from '@/assets/image/metamask.png'
 import googleIcon from '@/assets/image/google.png'
 import logoIcon from '@/assets/layouts/logo.png'
+import logoIcon1 from '@/assets/layouts/logo1.png'
 
 import { ElMessage } from 'element-plus'
 
@@ -92,6 +95,14 @@ const loginWithGoogle = () => {
 }
 
 const ruleFormRef = ref(null)
+
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const currentRoute = ref(route.fullPath)
+
+console.info('Current Route:', currentRoute.value)
 
 const sendCodeDisabled = ref(false)
 const loading = ref(false)

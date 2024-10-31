@@ -30,7 +30,7 @@
         </el-form-item>
 
         <el-form-item label-width="0px" class="mr-6 mt-50">
-          <div class="cursor-pointer btn flex-center ma" @click="handleOK">
+          <div :class="['btn flex-center ma', { 'cursor-not-allowed opacity-50': isButtonEnabled, 'cursor-pointer': !isButtonEnabled }]" @click="handleOK">
             {{ $t('selectSourceType.browseMap') }}
           </div>
         </el-form-item>
@@ -51,7 +51,7 @@
 import { reactive, ref, onBeforeMount } from 'vue'
 import api from '@/utils/api'
 import { ElLoading, ElMessage } from 'element-plus'
-import { buildContract, exceptionHandling, checkBalance, toAccountAmount, secondsToMinutesAndSeconds } from '@/utils/index'
+import { buildContract, exceptionHandling, checkBalance, toAccountAmount, secondsToMinutesAndSeconds, getBalance } from '@/utils/index'
 
 import { ethers } from 'ethers'
 
@@ -70,6 +70,8 @@ const epochMaxNum = ref(null)
 const app = ref(null)
 
 const currBlockchainId = ref(localStorage.getItem('currBlockchainId'))
+
+const isButtonEnabled = ref(false)
 
 let gLoading = null
 
@@ -93,6 +95,15 @@ onBeforeMount(async () => {
 })
 
 async function show(item, _parameter) {
+  if (typeof window.ethereum === 'undefined') {
+    isButtonEnabled.value = true
+  } else {
+    const balance = await getBalance()
+    if (balance === BigInt(0)) {
+      isButtonEnabled.value = true
+    }
+  }
+
   parameter = _parameter
   currBlockchainId.value = localStorage.getItem('currBlockchainId')
 
@@ -122,6 +133,9 @@ async function getMinerNode() {
 }
 
 async function handleOK() {
+  if (isButtonEnabled.value) {
+    return
+  }
   try {
     gLoading = ElLoading.service({
       lock: true,

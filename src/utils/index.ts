@@ -7,8 +7,6 @@ import { ethers } from 'ethers'
 
 import api from '@/utils/api'
 
-import numeral from 'numeral'
-
 import moment from 'moment-timezone'
 
 import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from 'element-plus'
@@ -63,6 +61,11 @@ async function checkChainId(chainId) {
 
 export async function buildContract(blockchainId, smartContractCode) {
   const user = useUserStore()
+
+  if (typeof window.ethereum === 'undefined') {
+    ElMessage.error('Please install a wallet to use this feature.')
+    throw new Error('Please install a wallet to use this feature.')
+  }
 
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
 
@@ -127,7 +130,22 @@ export async function buildContract(blockchainId, smartContractCode) {
   return contract
 }
 
+export async function getBalance() {
+  const provider = new ethers.BrowserProvider(window.ethereum)
+
+  const signer = await provider.getSigner()
+
+  const balance = await provider.getBalance(signer.getAddress())
+
+  return balance
+}
+
 export async function buildContractAddress(blockchainId, address) {
+  if (typeof window.ethereum === 'undefined') {
+    ElMessage.error('Please install a wallet to use this feature.')
+    throw new Error('Please install a wallet to use this feature.')
+  }
+
   const user = useUserStore()
 
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' })

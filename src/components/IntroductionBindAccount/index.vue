@@ -8,8 +8,8 @@
             <div class="p-6 sm:p-16 h-full">
               <div class="space-y-4">
                 <img :src="logoIcon" loading="lazy" class="w-10" alt="tailus logo" />
-                <h2 v-if="bindStatus === 'metamask'" class="mb-8 text-2xl font-bold" style="color: #4ceb75">To use the Hyperagi network, you need a digital wallet. Please bind a wallet.</h2>
-                <h2 v-else class="mb-8 text-2xl font-bold" style="color: #4ceb75">To use the mobile app, you need to bind an email. Please bind an email, and it is recommended to bind a Google or other third-party account first.</h2>
+                <h2 v-if="bindStatus === 'metamask'" class="mb-8 text-2xl font-bold" style="color: #4ceb75">To use the Hyperagi network, you need to use a crypto wallet. Please bind a wallet first.</h2>
+                <h2 v-else class="mb-8 text-2xl font-bold" style="color: #4ceb75">To make logging in easier, please link an email first. We recommend using your Google account or another third-party account for extra convenience.</h2>
               </div>
 
               <div class="mt-16 grid space-y-4">
