@@ -75,7 +75,7 @@ async function getBlockchainList() {
 }
 
 function showBindAccount() {
-  bindAccountRef.value.show()
+  introductionBindAccountRef.value.show('metamask')
 }
 
 onMounted(async () => {
@@ -184,6 +184,13 @@ function showLogin() {
               <el-button type="plain" @click="showBindEmail" class="text-xs" link>
                 {{ userStore.email || 'Bind Email' }}
               </el-button>
+            </p>
+
+            <p class="ml-1.25 flex items-center mt-7.5">
+              <el-icon size="20">
+                <SvgIcon width="1.5em" height="1.5em" name="metamask" />
+              </el-icon>
+              <el-button type="plain" @click="showBindAccount" class="text-xs" link> Bind Wallet </el-button>
             </p>
 
             <p class="ml-1.25 flex items-center mt-7.5">

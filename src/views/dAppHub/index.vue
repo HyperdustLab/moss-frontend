@@ -74,6 +74,12 @@
               </p>
 
               <p class="ml-1.25 flex items-center mt-7.5">
+                <SvgIcon width="1.5em" height="1.5em" name="metamask" />
+
+                <el-button type="plain" @click="showBindAccount" class="text-xs" link> Bind Wallet </el-button>
+              </p>
+
+              <p class="ml-1.25 flex items-center mt-7.5">
                 <el-image :src="logoutPng" class="w-5 h-5"></el-image>
 
                 <el-button type="plain" @click="disconnect" class="text-xs" link>{{ $t('index.disconnect') }}</el-button>
@@ -306,6 +312,10 @@ function showLogin() {
 
 function handleFeaturedProduct(item) {
   openApp(item.parameter)
+}
+
+function showBindAccount() {
+  introductionBindAccountRef.value.show('metamask')
 }
 
 function goHome() {

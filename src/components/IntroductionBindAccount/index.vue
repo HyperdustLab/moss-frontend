@@ -7,9 +7,9 @@
           <div class="rounded-xl shadow-xl h-full">
             <div class="p-6 sm:p-16 h-full">
               <div class="space-y-4">
-                <img :src="logoIcon" loading="lazy" class="w-10" alt="tailus logo" />
+                <img src="../../assets/layouts/logo-text-4.png" loading="lazy" class="w-80" alt="tailus logo" />
                 <h2 v-if="bindStatus === 'metamask'" class="mb-8 text-2xl font-bold" style="color: #4ceb75">To use the Hyperagi network, you need to use a crypto wallet. Please bind a wallet first.</h2>
-                <h2 v-else class="mb-8 text-2xl font-bold" style="color: #4ceb75">To make logging in easier, please link an email first. We recommend using your Google account or another third-party account for extra convenience.</h2>
+                <h2 v-else class="mb-8 text-2xl font-bold" style="color: #4ceb75">To facilitate logging into the mobile app, please bind an email address first. We recommend using your Google account or other third-party accounts to enhance convenience.</h2>
               </div>
 
               <div class="mt-16 grid space-y-4">
@@ -74,7 +74,6 @@
 <script lang="ts" setup>
 import metamaskIcon from '@/assets/image/metamask.png'
 import googleIcon from '@/assets/image/google.png'
-import logoIcon from '@/assets/layouts/logo.png'
 
 import { ElMessage } from 'element-plus'
 
