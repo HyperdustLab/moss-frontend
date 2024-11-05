@@ -1,13 +1,15 @@
 <template>
   <el-dialog v-model="dialogVisible" title="Login" width="50%" @close="onClose">
     <!-- component -->
-    <div class="relative py-16 bg-black h-150">
+    <div class="relative py-16 bg-black h-190">
       <div class="relative m-auto px-6 text-gray-300 md:px-12 xl:px-40 h-full">
         <div class="m-auto md:w-8/12 lg:w-6/12 xl:w-10/12 h-full">
           <div class="rounded-xl shadow-xl h-full">
             <div class="p-6 sm:p-16 h-full">
               <div class="space-y-4">
-                <img src="../../assets/layouts/logo-text-4.png" loading="lazy" class="w-80" alt="tailus logo" />
+                <div class="flex justify-center">
+                  <img src="../../assets/layouts/logo-text-4.png" loading="lazy" class="w-40" alt="tailus logo" />
+                </div>
                 <h2 class="mb-8 text-2xl font-bold" style="color: #4ceb75">Sign in to unlock the best of HyperAGI.</h2>
               </div>
 
