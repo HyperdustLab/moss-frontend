@@ -239,6 +239,7 @@ const searchData = reactive({
   status: 'Y',
   column: 'orderNum',
   order: 'asc',
+
   appTypeId: '',
   active: true,
   searchTxt: '',

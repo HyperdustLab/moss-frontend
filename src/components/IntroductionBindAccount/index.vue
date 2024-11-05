@@ -7,7 +7,9 @@
           <div class="rounded-xl shadow-xl h-full">
             <div class="p-6 sm:p-16 h-full">
               <div class="space-y-4">
-                <img src="../../assets/layouts/logo-text-4.png" loading="lazy" class="w-80" alt="tailus logo" />
+                <div class="flex justify-center">
+                  <img src="../../assets/layouts/logo-text-4.png" loading="lazy" class="w-40" alt="tailus logo" />
+                </div>
                 <h2 v-if="bindStatus === 'metamask'" class="mb-8 text-2xl font-bold" style="color: #4ceb75">To use the Hyperagi network, you need to use a crypto wallet. Please bind a wallet first.</h2>
                 <h2 v-else class="mb-8 text-2xl font-bold" style="color: #4ceb75">To facilitate logging into the mobile app, please bind an email address first. We recommend using your Google account or other third-party accounts to enhance convenience.</h2>
               </div>
