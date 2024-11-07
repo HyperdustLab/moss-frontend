@@ -14,13 +14,19 @@ const emit = defineEmits(['open'])
 
 const appTypeList = ref([{ id: '', name: 'All' }])
 
+const activeIndex = ref('')
+
 onBeforeMount(async () => {
   const { result } = await api.get('/mgn/appType/list', { pageSize: -1, column: 'orderNum', order: 'asc' })
 
   appTypeList.value.push(...result.records)
-})
 
-const activeIndex = ref('')
+  const filterList = appTypeList.value.filter((item) => item.def === 'Y')
+
+  if (filterList.length > 0) {
+    activeIndex.value = filterList[0].id
+  }
+})
 
 function handleOpen(index) {
   emit('open', index)

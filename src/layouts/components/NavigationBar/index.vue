@@ -186,7 +186,7 @@ function showLogin() {
               </el-button>
             </p>
 
-            <p class="ml-1.25 flex items-center mt-7.5">
+            <p v-if="!userStore.walletAddress" class="ml-1.25 flex items-center mt-7.5">
               <el-icon size="20">
                 <SvgIcon width="1.5em" height="1.5em" name="metamask" />
               </el-icon>

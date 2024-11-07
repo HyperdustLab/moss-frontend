@@ -73,7 +73,7 @@
                 </el-button>
               </p>
 
-              <p class="ml-1.25 flex items-center mt-7.5">
+              <p v-if="!user.walletAddress" class="ml-1.25 flex items-center mt-7.5">
                 <SvgIcon width="1.5em" height="1.5em" name="metamask" />
 
                 <el-button type="plain" @click="showBindAccount" class="text-xs" link> Bind Wallet </el-button>
