@@ -71,6 +71,14 @@ export const constantRoutes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
+  {
+    path: '/termsService',
+    component: () => import('@/views/termsService/index.vue'),
+    name: 'termsService',
+    meta: {
+      hidden: true,
+    },
+  },
 
   {
     path: '/Agent',

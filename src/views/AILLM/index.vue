@@ -61,7 +61,7 @@ const getTableData = async () => {
   const data = JSON.parse(result)
 
   if (searchData.name) {
-    tableData.value = data.model_reports.filter(i => i.name.includes(searchData.name))
+    tableData.value = data.model_reports.filter((i) => i.name.includes(searchData.name))
   } else {
     tableData.value = data.model_reports
   }
