@@ -82,18 +82,6 @@ onMounted(async () => {
   await getBlockchainList()
 
   currBlockchain.value = blockchainList.value.filter((item) => item.id === currBlockchainId.value)[0]
-
-  nextTick(async () => {
-    if (userStore.token) {
-      const bindStatus = await getBindStatus()
-
-      console.info('bindStatus:', bindStatus)
-
-      if (bindStatus !== 'none') {
-        introductionBindAccountRef.value.show(bindStatus)
-      }
-    }
-  })
 })
 
 function handleCommand(command) {

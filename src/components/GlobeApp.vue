@@ -58,7 +58,7 @@ async function openApp(sid, parameter) {
 
     console.info('bindStatus:', bindStatus)
 
-    if (bindStatus !== 'none') {
+    if (bindStatus !== 'none' && bindStatus !== 'email') {
       introductionBindAccountRef.value.show(bindStatus)
       return
     }

@@ -266,17 +266,6 @@ onMounted(() => {
 
   getTableData()
 
-  nextTick(async () => {
-    if (userStore.token) {
-      const bindStatus = await getBindStatus()
-
-      console.info('bindStatus:', bindStatus)
-
-      if (bindStatus !== 'none') {
-        introductionBindAccountRef.value.show(bindStatus)
-      }
-    }
-  })
 })
 
 const user = useUserStore()
@@ -424,7 +413,10 @@ function showBindEmail() {
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  box-shadow: 0 0 0 0 var(--el-input-border-color) inset, 0 0 0 0 var(--el-input-border-color) inset, 0 0 0 0 var(--el-input-border-color) inset;
+  box-shadow:
+    0 0 0 0 var(--el-input-border-color) inset,
+    0 0 0 0 var(--el-input-border-color) inset,
+    0 0 0 0 var(--el-input-border-color) inset;
 }
 
 :deep .el-input__wrapper {
