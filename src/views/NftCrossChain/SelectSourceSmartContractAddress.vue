@@ -70,7 +70,7 @@ function show(targetBlockchainId) {
 }
 
 function handleOK(row) {
-  emit('ok', row.address)
+  emit('ok', row)
   dialogVisible.value = false
 }
 

@@ -9,8 +9,8 @@
           </el-icon>
         </el-button>
       </div>
-      <el-card class="w-250 mx-auto h-150 mt-10">
-        <el-form ref="ruleFormRef" label-position="top" :model="formData" :rules="rules" label-width="200px" class="demo-ruleForm w-200 ml-9% mt-10%" status-icon>
+      <el-card class="w-250 mx-auto h-150 mt-2">
+        <el-form ref="ruleFormRef" label-position="top" :model="formData" :rules="rules" label-width="200px" class="demo-ruleForm w-200 ml-9% mt-2%" status-icon>
           <el-form-item label="Step1 Source Blockchain" prop="sourceBlockchainId">
             <el-input v-model="formData.sourceSmartContractAddress" readonly style="height: 80px; font-size: 20px" placeholder="Source SmartContract Address" class="input-with-select">
               <template #prepend>
@@ -30,6 +30,10 @@
                 <el-button @click="openSelectTargetNFTToken"> Select </el-button>
               </template>
             </el-input>
+          </el-form-item>
+
+          <el-form-item v-if="formData.type === 'ERC-1155'" class="mt-50" label="Number of NFTs to be moved" prop="num">
+            <el-input type="number" v-model="formData.num" style="max-width: 800px; height: 80px; font-size: 20px" placeholder="Number of NFTs to be moved" class="input-with-select"> </el-input>
           </el-form-item>
 
           <el-form-item class="w-200 mt-40 ml-30%">
@@ -92,11 +96,14 @@ const formData = reactive<Record<string, any>>({
   sourceBlockchainId: '',
   sourceSmartContractAddress: '',
   sourceTokenId: null,
+  type: '',
+  num: null,
 })
 
 const rules = reactive<FormRules<RuleForm>>({
-  name: [{ required: true, message: t('spaceForm.name'), trigger: 'blur' }],
-  coverImage: [{ required: true, message: t('spaceForm.coverImage'), trigger: 'blur' }],
+  sourceBlockchainId: [{ required: true, message: 'Please select source blockchain', trigger: 'blur' }],
+  sourceTokenId: [{ required: true, message: 'Please select source NFT token', trigger: 'blur' }],
+  num: [{ required: true, message: 'Please enter the number of NFTs to be moved', trigger: 'blur' }],
 })
 
 function close() {
@@ -129,7 +136,11 @@ function submitForm() {
       const contract = await buildContractAddress(formData.sourceBlockchainId, formData.sourceSmartContractAddress)
 
       try {
-        await contract.safeTransferFrom(user.walletAddress, NFT_Receiving_Address, formData.sourceTokenId)
+        if (formData.type === 'ERC-721') {
+          await contract.safeTransferFrom(user.walletAddress, NFT_Receiving_Address, formData.sourceTokenId)
+        } else {
+          await contract.safeTransferFrom(user.walletAddress, NFT_Receiving_Address, Number(formData.sourceTokenId), Number(formData.num), '0x')
+        }
         ElMessage.success('Transfer successful')
         confirmLoading.value = false
       } catch (e) {
@@ -142,8 +153,9 @@ function submitForm() {
   })
 }
 
-function handleSelectSourceSmartContractAddress(sourceSmartContractAddress) {
-  formData.sourceSmartContractAddress = sourceSmartContractAddress
+function handleSelectSourceSmartContractAddress(sourceSmartContract) {
+  formData.sourceSmartContractAddress = sourceSmartContract.address
+  formData.type = sourceSmartContract.type
 }
 
 function handleSelectTargetNFTToken(row) {

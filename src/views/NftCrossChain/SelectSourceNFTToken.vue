@@ -4,35 +4,34 @@ defineOptions({
   name: 'SelectSourceNFTToken',
 })
 
-import {onBeforeMount, reactive, ref, watch} from 'vue'
+import { onBeforeMount, reactive, ref, watch } from 'vue'
 
-import {useI18n} from 'vue-i18n'
+import { useI18n } from 'vue-i18n'
 
-import {type GetTableData} from '@/api/table/types/table'
-import {ElMessage, type FormInstance} from 'element-plus'
-import {usePagination} from '@/hooks/usePagination'
+import { type GetTableData } from '@/api/table/types/table'
+import { ElMessage, type FormInstance } from 'element-plus'
+import { usePagination } from '@/hooks/usePagination'
 import api from '@/utils/api'
-import {useUserStore} from '@/store/modules/user'
+import { useUserStore } from '@/store/modules/user'
 
-import {toAmount, toLocalTime, toServerTime} from '@/utils/index'
+import { toAmount, toLocalTime, toServerTime } from '@/utils/index'
 
 import Substring from '@/components/Substring.vue'
 
-
 const emit = defineEmits(['ok'])
 
-const {t} = useI18n()
+const { t } = useI18n()
 
 const drawer = ref(false)
 
 const loading = ref<boolean>(false)
-const {paginationData, handleCurrentChange, handleSizeChange} = usePagination()
+const { paginationData, handleCurrentChange, handleSizeChange } = usePagination()
 
 const tableData = ref<GetTableData[]>([])
 const searchFormRef = ref<FormInstance | null>(null)
 
 const searchData = reactive({
-  owner: useUserStore().username,
+  owner: useUserStore().walletAddress || useUserStore().username,
   blockchainId: '',
   column: 'createTime',
   order: 'desc',
@@ -44,7 +43,7 @@ const getTableData = async () => {
   searchData.pageNo = paginationData.currentPage
   searchData.pageSize = paginationData.pageSize
 
-  const {result} = await api.get('/mgn/nft/list', searchData)
+  const { result } = await api.get('/mgn/nft/list', searchData)
   tableData.value = result.records
   paginationData.total = result.total
   loading.value = false
@@ -65,7 +64,6 @@ async function show(blockchainId, contractAddress) {
   getTableData()
 }
 
-
 function ok(row) {
   emit('ok', row)
   drawer.value = false
@@ -78,7 +76,7 @@ defineExpose({
 //#endregion
 
 /** 监听分页参数的变化 */
-watch([() => paginationData.currentPage, () => paginationData.pageSize], getTableData, {immediate: false})
+watch([() => paginationData.currentPage, () => paginationData.pageSize], getTableData, { immediate: false })
 </script>
 
 <template>
@@ -130,7 +128,7 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
           </el-table>
         </div>
         <div class="pager-wrapper">
-          <el-pagination background :layout="paginationData.layout" :page-sizes="paginationData.pageSizes" :total="paginationData.total" :page-size="paginationData.pageSize" :currentPage="paginationData.currentPage" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>
+          <el-pagination background :layout="paginationData.layout" :page-sizes="paginationData.pageSizes" :total="paginationData.total" :page-size="paginationData.pageSize" :currentPage="paginationData.currentPage" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
         </div>
       </el-card>
     </div>

@@ -181,24 +181,6 @@ export const constantRoutes: RouteRecordRaw[] = [
     ],
   },
 
-  {
-    path: '/NftCrossChain',
-    component: Layouts,
-    redirect: '/NftCrossChain/index',
-    children: [
-      {
-        path: '/NftCrossChain/index',
-        component: () => import('@/views/NftCrossChain/AddForm.vue'),
-        name: 'NftCrossChain',
-        meta: {
-          title: 'Nft Cross Chain',
-          svgIcon: 'NftCrossChain',
-          keepAlive: true,
-        },
-      },
-    ],
-  },
-
   // {
   //   path: '/faucet',
   //   component: Layouts,
