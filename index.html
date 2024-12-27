@@ -5,20 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/app-loading.css" />
-    <title>HyperAGI</title>
+    <title>AI Pod for Fun</title>
   </head>
   <body>
     <div id="app">
       <div id="app-loading"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
-    <div class="flex flex-col items-center justify-center">
-      <p class="text-center text-gray-400">© 2024 HYPERDUST FOUNDATION LTD. All rights reserved.</p>
-      <a class="text-center text-gray-400 hover:text-gray-300" target="_blank" href="/privacyPolicy">Privacy Policy</a>
-      <div class="flex items-center justify-center gap-4 mt-4">
-        <a class="w-7 h-7" href="https://twitter.com/hyperdust" target="_blank"><img src="./src/assets/image/Twitter.png" alt="Twitter" /></a>
-        <a class="w-6 h-6" href="https://t.me/hyperdust" target="_blank"><img src="./src/assets/image/telegram.png" alt="Telegram" /></a>
-      </div>
-    </div>
+    <div id="page-footer" style="visibility: hidden">
+      <script>
+        setTimeout(() => {
+          document.getElementById('page-footer').style.visibility = 'visible'
+        }, 2000)
+      </script>
+    </div>  
   </body>
+
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+  <script setup>
+    import { ref } from 'vue'
+    const isAppLoaded = ref(false)
+
+    // 使用 nextTick 确保在 DOM 更新后再显示
+    import { nextTick } from 'vue'
+
+    // 监听应用加载完成事件
+    window.addEventListener('load', async () => {
+      await nextTick()
+      setTimeout(() => {
+        isAppLoaded.value = true
+      }, 100) // 添加小延迟确保平滑过渡
+    })
+  </script>
 </html>

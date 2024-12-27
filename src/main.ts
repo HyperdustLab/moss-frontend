@@ -26,6 +26,7 @@ import './assets/main.css'
 
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import PageFooter from './components/PageFooter.vue'
 
 const app = createApp(App)
 
@@ -46,3 +47,6 @@ app.use(store).use(router)
 router.isReady().then(() => {
   app.mount('#app')
 })
+
+// 单独挂载页脚
+createApp(PageFooter).mount('#page-footer')
