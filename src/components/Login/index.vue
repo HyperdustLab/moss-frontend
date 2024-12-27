@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="dialogVisible" title="Login" width="50%" @close="onClose">
     <!-- component -->
-    <div class="relative py-16 bg-black h-190">
+    <div class="relative py-16 bg-black h-200">
       <div class="relative m-auto px-6 text-gray-300 md:px-12 xl:px-40 h-full">
         <div class="m-auto md:w-8/12 lg:w-6/12 xl:w-10/12 h-full">
           <div class="rounded-xl shadow-xl h-full">
@@ -10,7 +10,7 @@
                 <div class="flex justify-center">
                   <img src="../../assets/layouts/logo-text-4.png" loading="lazy" class="w-40" alt="tailus logo" />
                 </div>
-                <h2 class="mb-8 text-2xl font-bold" style="color: #4ceb75">Sign in to unlock the best of HyperAGI.</h2>
+                <h2 class="mb-8 text-2xl font-bold text-center" style="color: #4ceb75">Sign in to unlock AI Pod for Fun.</h2>
               </div>
 
               <div class="mt-16 grid space-y-4">
@@ -50,9 +50,9 @@
 
                 <div>
                   <div class="flex justify-center">
-                    <el-button type="primary" @click="emailLogin" class="group h-12 w-50/100 px-12 border-2 border-gray-600 rounded-full transition duration-300 hover:border-blue-400 focus:bg-blue-900 active:bg-blue-800">
+                    <el-button type="primary" @click="emailLogin" class="group h-12 w-50/100 px-12 border-2 border-gray-600 rounded-full transition duration-300 hover:border-blue-400 focus:bg-blue-900 active:bg-blue-800" style="background-color: #00ff01; border-color: #00ff01">
                       <div class="relative flex items-center space-x-4 justify-center">
-                        <span class="block w-max font-semibold tracking-wide text-gray-300 text-sm transition duration-300 group-hover:text-blue-400 sm:text-base">Login with Email</span>
+                        <span class="block w-max font-semibold tracking-wide text-black text-sm transition duration-300 group-hover:text-blue-400 sm:text-base">Login with Email</span>
                       </div>
                     </el-button>
                   </div>

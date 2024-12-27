@@ -71,12 +71,23 @@ initTheme()
   <ElConfigProvider v-if="isInitialized" :locale="locale">
     <router-view />
 
-    <footer class="footer">
+    <!-- <footer class="footer">
       <div class="footer-content">
-        <a href="/privacyPolicy" target="_blank" class="footer-link">Privacy Policy</a>
+        <div class="footer-links">
+          <a href="/privacyPolicy" target="_blank" class="footer-link">Privacy Policy</a>
+        </div>
         <span class="footer-copyright">&copy; 2024 HYPERDUST FOUNDATION LTD.. All rights reserved.</span>
+
+        <div class="flex items-center gap-6">
+          <a href="https://twitter.com/hyperdust" target="_blank" class="hover:opacity-80">
+            <img src="@/assets/image/Twitter.png" alt="Twitter" class="w-6 h-6" />
+          </a>
+          <a href="https://t.me/hyperdust" target="_blank" class="hover:opacity-80">
+            <img src="@/assets/image/telegram.png" alt="Telegram" class="w-6 h-6" />
+          </a>
+        </div>
       </div>
-    </footer>
+    </footer> -->
   </ElConfigProvider>
 </template>
 <style scoped>
