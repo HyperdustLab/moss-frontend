@@ -2,17 +2,17 @@
   <div>
     <div class="fixed top-0 left-0 w-full z-1000 bg-[#141414]">
       <div class="flex justify-between">
-        <img @click="href('https://www.hyperagi.network/')" class="w-50 h-15" :src="logo" />
+        <img @click="href('https://www.aipod.fun/')" class="w-50 h-15" :src="logo" />
 
         <div class="flex justify-center w-full">
           <el-menu mode="horizontal" class="bg-[#141414] w-200" default-active="1">
-            <el-menu-item index="1" class="!mr-12" style="text-decoration: none"> Cloud AI Pods</el-menu-item>
+            <el-menu-item index="1" class="!mr-12" style="text-decoration: none"> AI Pod in Cloud</el-menu-item>
 
-            <el-menu-item @click="open('https://we.tl/t-lQT3MUe8d8')" class="!mr-12" style="text-decoration: none">Download AI Pads</el-menu-item>
+            <el-menu-item @click="open('https://we.tl/t-lQT3MUe8d8')" class="!mr-12" style="text-decoration: none">AI Pod Download</el-menu-item>
 
             <!-- <el-menu-item @click="nftCrossChainRef.show()" class="!mr-12" style="text-decoration: none">NFT Bridge</el-menu-item> -->
-            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/testnet-docs-and-guides/', '_blank')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
-            <el-menu-item @click="open('https://explorer.hyperagi.network/', '_blank')" class="!mr-12" style="text-decoration: none">Blockchain Explorer</el-menu-item>
+            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/testnet-docs-and-guides/')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
+            <el-menu-item @click="open('https://explorer.hyperagi.network/')" class="!mr-12" style="text-decoration: none">Blockchain Explorer</el-menu-item>
           </el-menu>
         </div>
 
