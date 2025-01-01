@@ -10,8 +10,8 @@
 
             <el-menu-item @click="open('https://we.tl/t-lQT3MUe8d8')" class="!mr-12" style="text-decoration: none">AI Pod Download</el-menu-item>
 
-            <!-- <el-menu-item @click="nftCrossChainRef.show()" class="!mr-12" style="text-decoration: none">NFT Bridge</el-menu-item> -->
-            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/testnet-docs-and-guides/')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
+            <el-menu-item @click="nftCrossChainRef.show()" class="!mr-12" style="text-decoration: none">NFT Bridge</el-menu-item>
+            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/moss-docs-and-guides/section-4-usdmoss-as-autonomous-ai-investment-fund')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
             <el-menu-item @click="open('https://explorer.hyperagi.network/')" class="!mr-12" style="text-decoration: none">Blockchain Explorer</el-menu-item>
           </el-menu>
         </div>
@@ -132,7 +132,7 @@
 
             <el-row class="mt-5">
               <el-col v-for="(item, index) in tableData" :span="8" :key="index">
-                <el-card class="w-[97%] mt-5" :body-style="{ padding: '0px' }" @click="openApp(item.sid)">
+                <el-card class="w-[90%] mt-50" :body-style="{ padding: '0px' }" @click="openApp(item.sid)">
                   <GlobeAppImage :value="item.coverImage" :image="item.image" :key="index"></GlobeAppImage>
                   <div class="p-3.5">
                     <span class="text-2xl font-extrabold"

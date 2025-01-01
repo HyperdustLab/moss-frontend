@@ -17,13 +17,13 @@
                 <button @click="loginWithGoogle" class="group h-12 px-6 border-2 border-gray-600 rounded-full transition duration-300 hover:border-blue-400 focus:bg-blue-900 active:bg-blue-800">
                   <div class="relative flex items-center justify-center">
                     <img :src="googleIcon" class="w-5 mr-2" alt="google logo" />
-                    <span class="block w-max font-semibold tracking-wide text-gray-300 text-sm transition duration-300 group-hover:text-blue-400 sm:text-base">Continue with Google</span>
+                    <span class="block w-max font-semibold tracking-wide text-gray-300 text-sm transition duration-300 group-hover:text-blue-400 sm:text-base">Google</span>
                   </div>
                 </button>
                 <button @click="handleMetamaskLogin" class="group h-12 px-6 border-2 border-gray-600 rounded-full transition duration-300 hover:border-blue-400 focus:bg-blue-900 active:bg-blue-800">
-                  <div class="relative flex items-center space-x-4 justify-center">
+                  <div class="relative flex items-center justify-center">
                     <img :src="metamaskIcon" class="w-5 mr-2" alt="google logo" />
-                    <span class="block w-max font-semibold tracking-wide text-gray-300 text-sm transition duration-300 group-hover:text-blue-400 sm:text-base">Continue with MetaMask</span>
+                    <span class="block w-max font-semibold tracking-wide text-gray-300 text-sm transition duration-300 group-hover:text-blue-400 sm:text-base">MetaMask</span>
                   </div>
                 </button>
               </div>
