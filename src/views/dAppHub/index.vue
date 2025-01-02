@@ -11,7 +11,7 @@
             <el-menu-item @click="open('https://we.tl/t-lQT3MUe8d8')" class="!mr-12" style="text-decoration: none">AI Pod Download</el-menu-item>
 
             <el-menu-item @click="nftCrossChainRef.show()" class="!mr-12" style="text-decoration: none">NFT Bridge</el-menu-item>
-            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/moss-docs-and-guides/section-4-usdmoss-as-autonomous-ai-investment-fund')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
+            <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/moss-ai-docs/how-to')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
             <el-menu-item @click="open('https://explorer.hyperagi.network/')" class="!mr-12" style="text-decoration: none">Blockchain Explorer</el-menu-item>
           </el-menu>
         </div>
