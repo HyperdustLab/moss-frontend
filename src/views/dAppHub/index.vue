@@ -8,7 +8,7 @@
           <el-menu mode="horizontal" class="bg-[#141414] w-200" default-active="1">
             <el-menu-item index="1" class="!mr-12" style="text-decoration: none"> AI Pod in Cloud</el-menu-item>
 
-            <el-menu-item @click="open('https://we.tl/t-lQT3MUe8d8')" class="!mr-12" style="text-decoration: none">AI Pod Download</el-menu-item>
+            <el-menu-item @click="download" class="!mr-12" style="text-decoration: none">AI Pod Download</el-menu-item>
 
             <el-menu-item @click="nftCrossChainRef.show()" class="!mr-12" style="text-decoration: none">NFT Bridge</el-menu-item>
             <el-menu-item @click="open('https://hyperdust-foundation.gitbook.io/moss-ai-docs/how-to')" class="!mr-12" style="text-decoration: none">Help Docs</el-menu-item>
@@ -297,6 +297,12 @@ onBeforeMount(async () => {
 
 function open(url) {
   window.open(url, '_blank')
+}
+
+async function download() {
+  const AIPodDownload = await api.getDictText('sys_config', 'AIPodDownload')
+
+  open(AIPodDownload)
 }
 
 function showLogin() {
