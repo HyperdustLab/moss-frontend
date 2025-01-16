@@ -2,7 +2,7 @@ import { request } from '@/utils/service'
 import type * as Login from './types/login'
 import api from '@/utils/api'
 import { useUserStore } from '@/store/modules/user'
-
+import { ElMessage } from 'element-plus'
 /** 获取登录验证码 */
 export function getLoginCodeApi() {
   return request<Login.LoginCodeResponseData>({
@@ -29,6 +29,11 @@ export function getUserInfoApi() {
 }
 
 export async function metamaskLogin() {
+  if (typeof window.ethereum === 'undefined') {
+    ElMessage.error('Please install a wallet to use this feature.')
+    throw new Error('Please install a wallet to use this feature.')
+  }
+
   // @ts-ignore
   await window.ethereum.enable()
   // @ts-ignore

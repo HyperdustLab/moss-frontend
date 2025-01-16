@@ -67,11 +67,31 @@ export async function buildContract(blockchainId, smartContractCode) {
     throw new Error('Please install a wallet to use this feature.')
   }
 
+  const account = user.walletAddress || user.account
+
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
 
-  if (accounts[0].toLowerCase() !== user.walletAddress.toLowerCase()) {
-    ElMessage.error('Sorry, the current use wallet and login wallet do not match')
-    throw new Error('Sorry, the current use wallet and login wallet do not match')
+  if (accounts[0].toLowerCase() !== account.toLowerCase()) {
+    const confirmSwitch = await ElMessageBox.confirm(`Please select address in wallet: ${account}\nCurrently connected address: ${accounts[0]}`, 'Please switch to correct wallet address', {
+      confirmButtonText: 'Open wallet to select',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+      dangerouslyUseHTMLString: true,
+    })
+
+    if (confirmSwitch) {
+      await ethereum.request({
+        method: 'wallet_requestPermissions',
+        params: [{ eth_accounts: {} }],
+      })
+      const newAccounts = await ethereum.request({ method: 'eth_requestAccounts' })
+      if (newAccounts[0].toLowerCase() !== account.toLowerCase()) {
+        ElMessage.error(`Please select address: ${account}`)
+        throw new Error(`Please select address: ${account}`)
+      }
+    } else {
+      throw new Error('User cancelled wallet switch')
+    }
   }
 
   const blockchain = await getBlockchain(blockchainId)
@@ -142,17 +162,36 @@ export async function getBalance() {
 
 export async function buildContractAddress(blockchainId, address) {
   if (typeof window.ethereum === 'undefined') {
-    ElMessage.error('Please install a wallet to use this feature.')
     throw new Error('Please install a wallet to use this feature.')
   }
 
   const user = useUserStore()
 
+  const account = user.walletAddress || user.account
+
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
 
-  if (accounts[0].toLowerCase() !== user.walletAddress.toLowerCase()) {
-    ElMessage.error('Sorry, the current use wallet and login wallet do not match')
-    throw new Error('Sorry, the current use wallet and login wallet do not match')
+  if (accounts[0].toLowerCase() !== account.toLowerCase()) {
+    const confirmSwitch = await ElMessageBox.confirm(`Please select address in wallet: ${account}\nCurrently connected address: ${accounts[0]}`, 'Please switch to correct wallet address', {
+      confirmButtonText: 'Open wallet to select',
+      cancelButtonText: 'Cancel',
+      type: 'warning',
+      dangerouslyUseHTMLString: true,
+    })
+
+    if (confirmSwitch) {
+      await ethereum.request({
+        method: 'wallet_requestPermissions',
+        params: [{ eth_accounts: {} }],
+      })
+      const newAccounts = await ethereum.request({ method: 'eth_requestAccounts' })
+      if (newAccounts[0].toLowerCase() !== account.toLowerCase()) {
+        ElMessage.error(`Please select address: ${account}`)
+        throw new Error(`Please select address: ${account}`)
+      }
+    } else {
+      throw new Error('User cancelled wallet switch')
+    }
   }
 
   const blockchain = await getBlockchain(blockchainId)
@@ -280,10 +319,10 @@ export function toServerTime(dateStr) {
 }
 
 export function exceptionHandling(e, t) {
-  console.error('Error details:', e) // 输出完整的错误详情
+  console.error('Error details:', e) // Output complete error details
 
   if (!e.code) {
-    // 检查网络相关的错误
+    // Check for network-related errors
     if (e.message.includes('Failed to fetch') || e.message.includes('Network Error')) {
       ElMessage.error(t('errors.networkError'))
       return
@@ -294,18 +333,18 @@ export function exceptionHandling(e, t) {
   }
 
   const error = e.info.error
-  // RPC错误处理
+  // RPC error handling
   if (error.code && error.code === 4001) {
-    // 用户拒绝了交易请求
+    // User rejected the transaction request
     ElMessage.error(t('errors.transactionRejectedByUser'))
   } else if (error.code && error.code === -32000) {
-    // 服务器拒绝了请求，可能是因为gas价格太低
+    // Server rejected the request, possibly due to low gas price
     ElMessage.error(t('errors.serverRejectedRequest'))
   } else if (e.reason) {
-    // 合约抛出的错误
+    // Contract error
     ElMessage.error(t('errors.contractError', { reason: e.reason }))
   } else {
-    // 其他类型的错误
+    // Other types of errors
     ElMessage.error(e.message || t('errors.unknownError'))
   }
 }
