@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col items-center justify-center" v-if="show">
-    <p class="text-center text-gray-400">© 2024 HYPERDUST FOUNDATION LTD. All rights reserved.</p>
+    <p class="text-center text-gray-400">© 2025 HYPERDUST FOUNDATION LTD. All rights reserved.</p>
     <a class="text-center text-gray-400 hover:text-gray-300" target="_blank" href="/privacyPolicy">Privacy Policy</a>
     <div class="flex items-center justify-center gap-4 mt-4">
-      <a class="w-7 h-7" href="https://twitter.com/hyperdust" target="_blank"><img src="../assets/image/Twitter.png" alt="Twitter" /></a>
-      <a class="w-6 h-6" href="https://t.me/hyperdust" target="_blank"><img src="../assets/image/telegram.png" alt="Telegram" /></a>
+      <a class="w-7 h-7" href="https://x.com/HyperDustIO" target="_blank"><img src="../assets/image/Twitter.png" alt="Twitter" /></a>
+      <a class="w-6 h-6" href="https://t.me/hyperdust_io" target="_blank"><img src="../assets/image/telegram.png" alt="Telegram" /></a>
     </div>
   </div>
 </template>
